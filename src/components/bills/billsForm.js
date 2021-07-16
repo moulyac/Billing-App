@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react'
+import { Button, Modal } from 'react-bootstrap';
 import { Hint } from 'react-autocomplete-hint';
 import { useSelector, useDispatch } from 'react-redux';
 import { asynProductGet } from '../../action/productAction'
 import { getCustomers } from '../../action/customerActions';
+import { asynBillPost } from '../../action/billsAction';
+import { ViewBill } from './billsList';
 
 const BillsForm = ()=>{
+    const [modalShow, setModalShow] = useState(false);
+
+
     const [mobile, setmobile] = useState('')
     const [name, setname] = useState('')
+    const [customerid, setcustomerid] = useState('')
+    const ndate = new Date().toISOString().split('T')[0]
+    const [date, setdate] = useState(ndate)
+    
 
     const dispatch = useDispatch()
 
@@ -81,8 +91,10 @@ const BillsForm = ()=>{
         const customer = customers.find((customer)=>{
             return customer.mobile === mobile
         })
-        if(customer)
+        if(customer){
+            console.log(customer)
         setname(customer.name)
+        setcustomerid(customer._id)}
         else
         alert('customer not found')
         
@@ -132,15 +144,52 @@ const BillsForm = ()=>{
        // console.log('item',itemprice)
        // }
     }
+
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+
+        const products = purchase.map((item)=>{
+            return {product : item.productid, quantity : item.quantity}
+        })
+
+        //console.log(products)
+
+        const obj ={
+            date : date,
+            customer : customerid,
+            lineItems : products
+        }
+
+        dispatch(asynBillPost(obj))
+
+        setpurchase([{name:'',price:0,quantity:1,productid:'',subtotal:0}])
+        setname('')
+        setmobile('')
+        setcustomerid('')
+        setdate(new Date().toISOString().split('T')[0])
+        setproductitem([])
+        settotalAmount(0)
+    }
+
+    const handleRemove = (i)=>{
+        const res = purchase.filter((item,index)=>{
+            return i !== index
+        })
+
+        setpurchase(res)
+    }
    
-    return <div>
-        <form>
+    return <div  onSubmit= {handleSubmit}>
+        
+            <label>date</label>
+            <input type='date' value={date} onChange={e=>setdate(e.target.value)} />
+        
             <h4> Customer details: </h4>
-            <input type='text' placeholder='enter the name' value={name} onChange={e => setname(e.target.value)} />
+            <input type='text' placeholder='enter the name' disabled={true} value={name} onChange={e => setname(e.target.value)} />
             <Hint options={customermob} >
-                <input type='text' placeholder='entr the number' value={mobile} onChange={e => setmobile(e.target.value)} onBlur={customerdetails} />
+                <input type='text' placeholder='enter the number' value={mobile} onChange={e => setmobile(e.target.value)} onBlur={customerdetails} />
             </Hint>
-        </form>
+        
 
         
             <h4>Product :</h4>
@@ -149,20 +198,35 @@ const BillsForm = ()=>{
                 purchase.map((item,i )=>{
                     return(
                         <div key={i}>
+                            <label>product name:</label>
                             <Hint options={productname} >
-                                <input type='text' value={item.name} name='name' onChange={(e)=>handlepurchase(e,i)} onBlur={handleproductdetails} />
+                                <input type='text' value={item.name} placeholder='name of the product' name='name' onChange={(e)=>handlepurchase(e,i)} onBlur={handleproductdetails} />
                             </Hint>
+                            <label>price:</label>
                             <input type='number' value={item.price} name='price' disabled={true} />
+                            <label> quantity:</label>
                             <input type='number' value={item.quantity} name='quantity' onChange={(e)=>handlepurchase(e,i)} />
+                            <label>subtotal:</label>
                             <input type='number' disabled={true} value={item.subtotal} />
-                            <button onClick={handleaddproduct}>+</button>
-
+                            
+                            <button onClick={(e)=>handleRemove(i)}>-</button>
                         </div>
                     )
                 })
             }
-
+            <button onClick={handleaddproduct}>+</button>
+            <br/>
+            <label>totalAmount:</label>
             <input type='number' value={totalAmount}/>
+            <br/>
+            <form>
+            {/* <Button variant="primary" onClick={() => setModalShow(true)}>
+                submit
+            </Button>
+
+            <ViewBill id={} show={modalShow} onHide={() => setModalShow(false)} />             */}
+            <input type='submit'/>
+      </form>
     </div>
 }
 

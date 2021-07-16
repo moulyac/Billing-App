@@ -5,6 +5,10 @@ export const billsReducer = (state = initialStateBills, action)=>{
         case 'BILLSLIST': {
             return [...action.payload]
         }
+
+        case 'ADDBILL' : {
+            return [...state,{...action.payload}]
+        }
         default : {
             return [...state]
         }

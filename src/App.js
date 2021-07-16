@@ -3,6 +3,7 @@ import React,{ useState, useEffect } from 'react'
 import Home from './components/Home'
 import { useDispatch } from 'react-redux'
 import { stateLogin } from './action/postmethod'
+import './components/style.css'
 
 const App=()=>{
     const dispatch = useDispatch()

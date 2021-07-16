@@ -9,7 +9,7 @@ export const getCustomers = ()=>{
             })
             .then((response)=>{
                 const result=response.data
-                console.log(result)
+               // console.log(result)
                 dispatch(customersList(result))
 
             })
@@ -41,7 +41,7 @@ export const AddCustomerPost = (formData)=>{
                                 console.log(result.errors)
                             }
                             else{
-                                console.log(result)
+                               // console.log(result)
                                 dispatch(addCustomerAction(result))
                             }
                         })

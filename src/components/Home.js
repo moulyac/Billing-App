@@ -8,6 +8,7 @@ import { stateLogin } from '../action/postmethod'
 import Customer from './Customer'
 import Product from './products/products'
 import Bills from './bills/bills'
+import {ViewBill} from './bills/billsList'
 
 const Home = (props)=>{
     const login = useSelector((state)=>{
@@ -72,6 +73,8 @@ const Home = (props)=>{
                             return login? <Bills {...props} /> : <Login {...props}
                             />
                         }}/>
+
+                        <Route path={`/bill/:id`} component={ViewBill}/>
                         
                     </div>
                 </>

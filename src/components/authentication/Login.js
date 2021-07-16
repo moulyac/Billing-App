@@ -1,6 +1,8 @@
 import React, { useState }  from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { postMethodLogin } from '../../action/postmethod'
+import '../style.css'
 
 const Login = (props)=>{
     const [email, setEmail]= useState('')
@@ -37,42 +39,37 @@ const Login = (props)=>{
         }
     }
     //console.log(login)
-    return (
-        <div>
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label >Email address</label>
-                    <input
+    return<div  class='logregpage'>
+            <div class='border'>
+                <h2 style={{ textAlign:'center'}} class='mb-5'>Login Form</h2>
+                    <form onSubmit={handleSubmit} class="Form">
+                        <div class="mb-3">
+                            <label for="inputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="inputEmail1"
+                                type='email'
+                                placeholder='enter email'
+                                value={email}
+                                name='email'
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="inputPassword1"
+                                type='password'
+                                placeholder='enter password'
+                                value={password}
+                                name='password'
+                                onChange={handleChange}
+                            />
+                        </div>
                         
-                        type='email'
-                        placeholder='enter email'
-                        value={email}
-                        name='email'
-                        onChange={handleChange}
-                    />
-                </div>
-            
-                <div>
-                    <label>Password</label>
-                    <input
-                        type='password'
-                        placeholder='enter password'
-                        value={password}
-                        name='password'
-                        onChange={handleChange}
-                    />
-                </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <hr/><p style={{textAlign:'center'}} class='pd-1'>Dont have a account?<Link to='/register'>signUp</Link></p>
 
-                <br/>
-
-                <input  type='submit'/>
-
-            </form>
+                    </form>
+            </div>
         </div>
-        </div>
-    )
 }
 
 export default Login

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Button, Modal } from 'react-bootstrap'
 import { AddCustomerPost, deleteCustomer, getCustomers, editCustomer } from '../action/customerActions'
 
 const Customer =()=>{
@@ -9,6 +10,10 @@ const Customer =()=>{
     const [searchText, setsearchText] = useState('')
     const [searchList, setSearchList] = useState([])
 
+    const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
     const dispatch = useDispatch()
     useEffect(()=>{
@@ -54,10 +59,31 @@ const Customer =()=>{
             <h1>Customer :</h1>
             <input type='text' placeholder='search' value={searchText} onChange={handlesearch} />
 
-            <button onClick={handleAddCustomers}>Add Customer</button>
-                {
-                   Object.keys(addCustomer).length>0 && <AddCustomer customerformData={customerformData}/>
-                }
+            
+
+<Button variant="primary" onClick={handleShow}>
+Add Customer
+      </Button>
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Modal title</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <AddCustomer customerformData={customerformData}/>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          {/* <Button variant="primary">Understood</Button> */}
+        </Modal.Footer>
+      </Modal>
 
             <h1>Customers List - {customers.length}</h1>
 
@@ -79,6 +105,24 @@ const Customer =()=>{
                                 <li>{customer.name} - {customer.mobile}</li> 
                                 <button onClick={()=>handleDelete(customer)}>delete</button>
                                 <button onClick={()=>{handleEdit(customer)}}>edit</button>
+                                <Button variant="primary" onClick={handleShow}>
+        edit
+      </Button>
+
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body><AddCustomer editcustomer={editcustomer} customerformData={customerformData}/></Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
                             </div>
                         )
                     })
