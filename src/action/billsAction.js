@@ -52,3 +52,27 @@ export const billPostAction = (data)=>{
         payload : data
     }
 }
+
+export const asynBillDelete = (id)=>{
+    return (dispatch)=>{
+        axios.delete(`http://dct-billing-app.herokuapp.com/api/bills/${id}`,{
+            headers:{
+                'Authorization':`bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then((response)=>{
+            const data = response.data 
+            dispatch(billDeleteAction(data))
+        })
+        .catch((err)=>{
+            console.log(err.msg)
+        })
+    }
+}
+
+export const billDeleteAction = (data)=>{
+    return{
+        type: 'BILLDELETE',
+        payload: data
+    }
+}

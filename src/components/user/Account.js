@@ -15,7 +15,7 @@ const Account = (props)=>{
     return(
         <div>
             <h1>User Account</h1>
-            <div>
+            <div class='container m-4'>
                 <h3><>Email</> - {user.email}</h3>
                 <h3><>UserName</> - {user.username}</h3>
                 <h3><>businessName</> - {user.businessName}</h3>

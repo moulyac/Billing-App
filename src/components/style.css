@@ -11,3 +11,7 @@
     padding-bottom: 0.1rem;
     background-color: rgb(252, 251, 249);
 }
+
+.searchbar{
+    width: 20rem;
+}

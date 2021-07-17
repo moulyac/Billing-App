@@ -5,7 +5,7 @@ import { asynAddProduct, asynEditProduct } from '../../action/productAction'
 const ProductForm = ({handleaddproduct, editProduct, callbacksetEditproduct, id})=>{
     const [name, setname] = useState(editProduct? editProduct.name :  '')
     const [price, setprice] = useState(editProduct? editProduct.price : 0)
-
+   
     const dispatch = useDispatch()
 
     const handlesubmit = (e)=>{
@@ -18,13 +18,14 @@ const ProductForm = ({handleaddproduct, editProduct, callbacksetEditproduct, id}
         if(editProduct && Object.keys(editProduct).length>0){
             dispatch(asynEditProduct(formDate, id))
             callbacksetEditproduct()
+            alert('The product is updated successfully')
         }else{
             dispatch(asynAddProduct(formDate))
+            alert('The product is added successfully')
             handleaddproduct()
         }
         setname('')
         setprice(0)
-        
     }
 
     const hanldeChange = (e)=>{
@@ -37,11 +38,29 @@ const ProductForm = ({handleaddproduct, editProduct, callbacksetEditproduct, id}
         }
     }
     return(
-        <div>
+        <div class='mt-3'>
             <form onSubmit={handlesubmit}>
-                <input type='text' name='name' value={name} onChange={hanldeChange} />
-                <input type='number' name='price' value={price} onChange={hanldeChange} />  
-                <input type='submit'/>              
+                <div class="mb-3">
+                    <label for="productname" class="form-label">Product Name</label>
+                    <input type="text" class="form-control" id="productname"
+                        value={name} 
+                        name='name'
+                        onChange={hanldeChange}
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="productprice" class="form-label">Product Price</label>
+                    <input type="number" class="form-control" id="productname"
+                        value={price}
+                        name='price'
+                        onChange={hanldeChange}
+                    />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+                
+                
             </form>
         </div>
     )

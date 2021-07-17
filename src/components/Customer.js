@@ -55,83 +55,96 @@ const Customer =()=>{
         setSearchList(result)
     }
     return(
-        <div>
+        <div class='container'>
+            <div class='row'>
+            <div class='col'>
             <h1>Customer :</h1>
-            <input type='text' placeholder='search' value={searchText} onChange={handlesearch} />
+            </div>
+            <div class='col text-end p-2'>
+            <Button variant="primary" onClick={handleShow}>
+                Add Customer
+            </Button>
 
-            
+            </div>
 
-<Button variant="primary" onClick={handleShow}>
-Add Customer
-      </Button>
+            </div>
 
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <AddCustomer customerformData={customerformData}/>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          {/* <Button variant="primary">Understood</Button> */}
-        </Modal.Footer>
-      </Modal>
+        <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+        >
+            <Modal.Header >
+            <Modal.Title>Add Customer</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <AddCustomer customerformData={customerformData} buttonName='Add'/>
+            </Modal.Body>
+            <Modal.Footer>
+            <button  class="btn btn-dark" onClick={handleClose}>
+                Close
+            </button>
+            </Modal.Footer>
+        </Modal>
 
-            <h1>Customers List - {customers.length}</h1>
-
-            {
-                searchList.length>0? (
-                    searchList.map((customer)=>{
-                        return(
-                            <div key={customer._id}>
-                                <li>{customer.name} - {customer.mobile}</li> 
-                                <button onClick={()=>handleDelete(customer)}>delete</button>
-                                <button onClick={()=>{handleEdit(customer)}}>edit</button>
-                            </div>
+            <div class='container'>
+                
+                    <div class='row'>
+                        <div class='col'>
+                            <h1>Customers List - {customers.length}</h1>
+                        </div>
+                        <div class='col p-2'>
+                            <input type='search' className='searchbar'  placeholder='Search by mobile number' value={searchText} onChange={handlesearch} />
+                        </div>
+                    </div>
+                <div class='row'>   
+                    <div class='col'>
+                    <div class='container my-5'>
+                    {
+                        searchList.length>0? (
+                            searchList.map((customer)=>{
+                                return(
+                                    <div key={customer._id}>
+                                        <li class=" row fs-4">
+                                            <div class='col' >{customer.name} - {customer.mobile}</div>
+                                            <div class='col-3'>
+                                            <button class="btn btn-danger btn-sm m-2" onClick={()=>handleDelete(customer)}>delete</button>
+                                            </div>
+                                            <div class='col-1'>
+                                            <button class="btn btn-dark btn-sm m-2" onClick={()=>{handleEdit(customer)}}>edit</button>
+                                            </div>
+                                        </li> 
+                                    </div>
+                                )
+                            })
+                        ):(
+                            customers.map((customer)=>{
+                                return(
+                                    <div key={customer._id}>
+                                        <li class=" row fs-4">
+                                            <div class='col' >{customer.name} - {customer.mobile}</div>
+                                            <div class='col-3'>
+                                            <button class="btn btn-danger btn-sm m-2" onClick={()=>handleDelete(customer)}>delete</button>
+                                            </div>
+                                            <div class='col-1'>
+                                            <button class="btn btn-dark btn-sm m-2" onClick={()=>{handleEdit(customer)}}>edit</button>
+                                            </div>
+                                        </li> 
+                                    </div> 
+                                )
+                            })
                         )
-                    })
-                ):(
-                    customers.map((customer)=>{
-                        return(
-                            <div key={customer._id}>
-                                <li>{customer.name} - {customer.mobile}</li> 
-                                <button onClick={()=>handleDelete(customer)}>delete</button>
-                                <button onClick={()=>{handleEdit(customer)}}>edit</button>
-                                <Button variant="primary" onClick={handleShow}>
-        edit
-      </Button>
-
-      <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body><AddCustomer editcustomer={editcustomer} customerformData={customerformData}/></Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-                            </div>
-                        )
-                    })
-                )
-            }
-
-            {
-                Object.keys(editcustomer).length>0 && <AddCustomer editcustomer={editcustomer} customerformData={customerformData} />
-            }
+                    }
+                    </div>
+                </div>
+                <div class='col p-4'>
+                    {
+                        Object.keys(editcustomer).length>0 && <AddCustomer editcustomer={editcustomer} buttonName='Update' customerformData={customerformData} />
+                    }
+                </div>
+            </div>   
+            </div>
         </div>
     )
 }
@@ -139,14 +152,14 @@ Add Customer
 export default Customer
 
 
-const AddCustomer = ({ customerformData, editcustomer})=>{
+const AddCustomer = ({ customerformData, editcustomer, buttonName})=>{
     const [email, setemail] = useState(editcustomer? editcustomer.email : '')
     const [name, setname] = useState(editcustomer? editcustomer.name : '')
     const [mobile, setmobile] =useState(editcustomer? editcustomer.mobile : '')
-
+//console.log(editCustomer)
     const handleChange = (e)=>{
         const text = e.target.value
-        
+        //console.log(text)
         if(e.target.name === 'name'){
             setname(text)
         }else if(e.target.name  === 'mobile'){
@@ -157,24 +170,53 @@ const AddCustomer = ({ customerformData, editcustomer})=>{
     }
     const hanldeSubmit=(e)=>{
         e.preventDefault()
+        if(name && mobile){
         const formData = {
             name:name,
             mobile:mobile,
             email:email
         }
         customerformData(formData)
+        alert(`The customer details have been ${buttonName}ed successfully:)`)
         setname('')
         setemail('')
         setmobile('')
+    }else{
+        alert('Customer name and mobile number are mandatory!!')
+    }
     }
     
     return (
         <div>
             <form onSubmit={hanldeSubmit}>
-                <input type='text' placeholder='name' name='name' value={name} onChange={handleChange} /><br/>
-                <input type='text' placeholder='mobile' name='mobile' value={mobile} onChange={handleChange} /><br/>
-                <input type='text' placeholder='email' name='email' value={email} onChange={handleChange} /><br/>
-                <input type='submit' value='add'/>
+
+                <div class="mb-3">
+                    <label for="customername" class="form-label">Customer Name*</label>
+                    <input type="text" class="form-control" id="customername"
+                        value={name} 
+                        name='name'
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="mobile" class="form-label">Mobile Number*</label>
+                    <input type="text" class="form-control" id="mobile"
+                        value={mobile} 
+                        name='mobile'
+                        onChange={handleChange}
+                    />
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="email"
+                        value={email} 
+                        name='email' 
+                        onChange={handleChange}
+                    />
+                </div>
+                <button type="submit" class="btn btn-primary">{buttonName}</button>
+
             </form>
         </div>
     )

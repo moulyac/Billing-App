@@ -1,7 +1,7 @@
 import React, { useDebugValue, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {Link, Route} from 'react-router-dom'
-import { asynBillGet } from '../../action/billsAction'
+import { asynBillDelete, asynBillGet } from '../../action/billsAction'
 import { asynProductGet } from '../../action/productAction'
 import { getCustomers } from '../../action/customerActions';
  
@@ -27,19 +27,33 @@ import { getCustomers } from '../../action/customerActions';
         //console.log( 'cu ',customer.name)
         return customer.name
     }
-    return <div>
+    const handleDelete = (id)=>{
+        dispatch(asynBillDelete(id))
+    }
+    return <div class='container'>
         <h2>All Bills - {bills.length} </h2>
-
+        <div class='container'>
         {
             bills.map((bill)=>{
-                return <li key={bill._id}>{customername(bill.customer,customers)} &nbsp;
-                        date : {bill.date.split('T')[0]} &nbsp; 
-                        <Link to={`/bill/${bill._id}`}>view</Link>
-                          
+                return <div key={bill._id}>
+                    <li class="row fs-4">
+                        <div class='col-2'>
+                            {customername(bill.customer,customers)} 
+                        </div>
+                        <div class='col-2'>
+                            {bill.date.split('T')[0]}  
+                        </div>
+                        <div class='col-1'>
+                            <Link to={`/bill/${bill._id}`}>view</Link>
+                        </div>
+                        <div class='col-1'>
+                            <button class="btn btn-danger btn-sm my-2 mx-3" onClick={ ()=>handleDelete(bill._id)} >Delete</button>
+                        </div>
                 </li>
+                    </div>
             })
         }
-        
+       </div> 
     </div>
 }
 
@@ -85,25 +99,38 @@ export const ViewBill = (props)=>{
 
      //console.log(productd)
     
-        return <div>
-            <h1> {user.businessName} </h1>
-            <p> {user.address} </p>
+        return <div class='container'>
+            <Link to='/bills' style={{fontFamily:'auto'}}>Back to list</Link>
+            <div>
+                <div class='row'>
+                   <div class='col'>
+                        <h1> {user.businessName} </h1>
+                        <p> {user.address} </p>
+                   </div>
 
-            <h3>Date : {date.split('T')[0]} </h3>
-            <h3>Invoice No: </h3>
+                    <div class='col'>
+                        <h3>Date : {date.split('T')[0]} </h3>
+                        <h3>Invoice No:  </h3>
+                    </div>
+                </div>
 
             <h2>Customer : {customerd.name}</h2>
 
-            <table>
+            <table class="table">
+                <thead>
                 <tr>
-                    <th>product</th>
-                    <th>unit price</th>
-                    <th>quantity</th>
-                    <th>amount</th>
+                    <th>#</th>
+                    <th scope="col">product</th>
+                    <th scope="col">unit price</th>
+                    <th scope="col">quantity</th>
+                    <th scope="col">amount</th>
                 </tr>
-                {
-                    productd.map((p)=>{
+                </thead>
+               <tbody>
+               {
+                    productd.map((p,i)=>{
                         return <tr>
+                            <th scope="row">{i}</th>
                             <td>{p.name}</td>
                             <td> {p.price} </td>
                             <td> {p.quantity} </td>
@@ -111,7 +138,14 @@ export const ViewBill = (props)=>{
                         </tr>
                     })
                 }
+               </tbody>
+               
             </table>
-            <h3>Grand Total: {total} </h3>
+            <div class='row'>
+                <div class='col text-end'>
+                <h3>Grand Total: {total} </h3>
+                </div>
+            </div>
+        </div>
         </div>
 }

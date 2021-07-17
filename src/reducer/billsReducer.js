@@ -9,6 +9,12 @@ export const billsReducer = (state = initialStateBills, action)=>{
         case 'ADDBILL' : {
             return [...state,{...action.payload}]
         }
+
+        case 'BILLDELETE' : {
+            return state.filter((bill)=>{
+                return bill._id != action.payload._id
+            })
+        }
         default : {
             return [...state]
         }

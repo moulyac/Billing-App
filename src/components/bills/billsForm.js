@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { asynProductGet } from '../../action/productAction'
 import { getCustomers } from '../../action/customerActions';
 import { asynBillPost } from '../../action/billsAction';
+import {AiOutlineMinusCircle} from 'react-icons/ai'
 import { ViewBill } from './billsList';
 
 const BillsForm = ()=>{
@@ -180,44 +181,70 @@ const BillsForm = ()=>{
     }
    
     return <div  onSubmit= {handleSubmit}>
-        
-            <label>date</label>
-            <input type='date' value={date} onChange={e=>setdate(e.target.value)} />
-        
-            <h4> Customer details: </h4>
-            <input type='text' placeholder='enter the name' disabled={true} value={name} onChange={e => setname(e.target.value)} />
-            <Hint options={customermob} >
-                <input type='text' placeholder='enter the number' value={mobile} onChange={e => setmobile(e.target.value)} onBlur={customerdetails} />
-            </Hint>
+            <div class='row'>
+                <div class='col-1'>
+                    <label class="form-label fs-5">Date:</label>
+                </div>
+                <div class='col-5'>
+                    <input class="form-control" type='Date' value={date} onChange={e=>setdate(e.target.value)} />
+                </div>
+            </div>
+
+            <h4 class='my-2'> Customer details: </h4>
+            <div class='row'>
+                <div class='col'>
+                    <input class="form-control" type='text' placeholder='Customer Name' disabled={true} value={name} onChange={e => setname(e.target.value)} />
+                </div>
+                <div class='col'>
+                    <Hint options={customermob} >
+                        <input class="form-control" type='text' placeholder='Enter the number' value={mobile} onChange={e => setmobile(e.target.value)} onBlur={customerdetails} />
+                    </Hint>
+                </div>
+            </div>
         
 
         
-            <h4>Product :</h4>
+            <h4 class='my-2'>Product :</h4>
 
             {
                 purchase.map((item,i )=>{
                     return(
                         <div key={i}>
-                            <label>product name:</label>
-                            <Hint options={productname} >
-                                <input type='text' value={item.name} placeholder='name of the product' name='name' onChange={(e)=>handlepurchase(e,i)} onBlur={handleproductdetails} />
-                            </Hint>
-                            <label>price:</label>
-                            <input type='number' value={item.price} name='price' disabled={true} />
-                            <label> quantity:</label>
-                            <input type='number' value={item.quantity} name='quantity' onChange={(e)=>handlepurchase(e,i)} />
-                            <label>subtotal:</label>
-                            <input type='number' disabled={true} value={item.subtotal} />
+                            <div class='row'>
+                                <div class='col'>
+                                    <label class="form-label">Product Name:</label>
+                                    <Hint options={productname} >
+                                        <input class="form-control" type='text' value={item.name} placeholder='name of the product' name='name' onChange={(e)=>handlepurchase(e,i)} onBlur={handleproductdetails} />
+                                    </Hint>
+                                </div>
+                                <div class='col'>
+                                    <label class="form-label">Price:</label>
+                                    <input type='number' class="form-control" value={item.price} name='price' disabled={true} />
+                                </div>
+                             </div> 
+
+                            <div class='row'>
+                                <div class='col'>
+                                    <label class="form-label"> Quantity:</label>
+                                    <input type='number' class="form-control" value={item.quantity} name='quantity' onChange={(e)=>handlepurchase(e,i)} />
+                                </div>
+                                <div class='col'>
+                                    <label class="form-label">Subtotal:</label>
+                                    <input type='number' class="form-control" disabled={true} value={item.subtotal} />
+                                </div>
+                                <div class='col pt-2'>
+                                    <button class=' ms-5' onClick={(e)=>handleRemove(i)} style={{border:'transparent', backgroundColor:'white', fontSize:'2rem'}}><AiOutlineMinusCircle/></button>
+                                </div> 
+                            </div> 
                             
-                            <button onClick={(e)=>handleRemove(i)}>-</button>
                         </div>
                     )
                 })
             }
-            <button onClick={handleaddproduct}>+</button>
+            <button onClick={handleaddproduct} class="btn btn-secondary m-2">Add Product</button>
             <br/>
-            <label>totalAmount:</label>
-            <input type='number' value={totalAmount}/>
+            <label class="form-label">TotalAmount:</label>
+            <input type='number' class="form-control" value={totalAmount}/>
             <br/>
             <form>
             {/* <Button variant="primary" onClick={() => setModalShow(true)}>
@@ -225,7 +252,7 @@ const BillsForm = ()=>{
             </Button>
 
             <ViewBill id={} show={modalShow} onHide={() => setModalShow(false)} />             */}
-            <input type='submit'/>
+            <input class="btn btn-success" type='submit'/>
       </form>
     </div>
 }
