@@ -1,15 +1,13 @@
-import axios from 'axios'
+import axios from '../config/axiosConfig'
 
 export const asynBillGet = ()=>{
     return (dispatch)=>{
-        axios.get('http://dct-billing-app.herokuapp.com/api/bills',{
-                headers:{
-                    'Authorization':`bearer ${localStorage.getItem('token')}`
-                }
-            })
+        axios.get('/api/bills')
             .then((response)=>{
                 const result=response.data
-                //console.log( result)
+                if(result.hasOwnProperty('errors'))
+                alert(result.errors)
+                else
                 dispatch(billsgetAction(result))
 
             })
@@ -31,13 +29,13 @@ export const billsgetAction = (data)=>{
 
 export const asynBillPost = (billdata)=>{
     return (dispatch)=>{
-        axios.post('http://dct-billing-app.herokuapp.com/api/bills',billdata,{
-            headers:{
-                'Authorization':`bearer ${localStorage.getItem('token')}`
-            }
-        })
+        axios.post('/api/bills',billdata)
         .then((response)=>{
             const data = response.data
+            
+            if(data.hasOwnProperty('errors'))
+                alert(data.errors)
+            else
             dispatch(billPostAction(data))
         })
         .catch((err)=>{
@@ -55,13 +53,12 @@ export const billPostAction = (data)=>{
 
 export const asynBillDelete = (id)=>{
     return (dispatch)=>{
-        axios.delete(`http://dct-billing-app.herokuapp.com/api/bills/${id}`,{
-            headers:{
-                'Authorization':`bearer ${localStorage.getItem('token')}`
-            }
-        })
+        axios.delete(`/api/bills/${id}`)
         .then((response)=>{
             const data = response.data 
+            if(data.hasOwnProperty('errors'))
+                alert(data.errors)
+            else
             dispatch(billDeleteAction(data))
         })
         .catch((err)=>{

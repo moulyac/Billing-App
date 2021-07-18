@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { postMethodLogin } from '../../action/postmethod'
 import '../style.css'
+import Homepage from '../Homepage'
 
 const Login = (props)=>{
     const [email, setEmail]= useState('')
@@ -23,11 +24,7 @@ const Login = (props)=>{
         }
         //console.log(formData)
 
-        dispatch(postMethodLogin(formData))
-
-        if(login){
-            props.history.push('/account')
-        }
+        dispatch(postMethodLogin(formData,props.history.push))
     }
 
     const handleChange = (e)=>{
@@ -39,7 +36,12 @@ const Login = (props)=>{
         }
     }
     //console.log(login)
-    return<div  class='logregpage'>
+    return<div class='row'>
+        <div class='col'>
+            <Homepage/>
+        </div>
+        <div class='col'>
+    <div  class='logregpage'>
             <div class='border'>
                 <h2 style={{ textAlign:'center'}} class='mb-5'>Login Form</h2>
                     <form onSubmit={handleSubmit} class="Form">
@@ -69,6 +71,8 @@ const Login = (props)=>{
 
                     </form>
             </div>
+        </div>
+        </div>
         </div>
 }
 

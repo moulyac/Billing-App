@@ -1,8 +1,8 @@
-import axios from 'axios'
+import axios from '../config/axiosConfig'
 
 export const postMethodRegister = (values)=>{
     return (dispatch)=>{
-    axios.post('http://dct-billing-app.herokuapp.com/api/users/register',values)
+    axios.post('/api/users/register',values)
             .then((response)=>{
                 const result=(response.data)
                 if(result.hasOwnProperty('errors')){
@@ -28,9 +28,9 @@ export const stateRegister = (b)=>{
 }
 
 
-export const postMethodLogin = (formData)=>{
+export const postMethodLogin = (formData,history)=>{
     return (dispatch)=>{
-        axios.post('http://dct-billing-app.herokuapp.com/api/users/login',formData)
+        axios.post('/api/users/login',formData)
             .then((response)=>{
                 const result=(response.data)
                 if(result.hasOwnProperty('errors')){
@@ -40,9 +40,9 @@ export const postMethodLogin = (formData)=>{
                     console.log(result.token)
                     dispatch(stateLogin(true))
                     localStorage.setItem('token',result.token)
-                   // props.history.push('/')
-                   // props.handleAuth()
                     alert('successfully logged in' )
+                    window.location.reload()
+                    history('/dashboard')
                 }
             })
             .catch((err)=>{

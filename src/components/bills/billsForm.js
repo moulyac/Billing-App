@@ -180,7 +180,8 @@ const BillsForm = ()=>{
         setpurchase(res)
     }
    
-    return <div  onSubmit= {handleSubmit}>
+    return <div>
+        
             <div class='row'>
                 <div class='col-1'>
                     <label class="form-label fs-5">Date:</label>
@@ -201,9 +202,7 @@ const BillsForm = ()=>{
                     </Hint>
                 </div>
             </div>
-        
 
-        
             <h4 class='my-2'>Product :</h4>
 
             {
@@ -211,30 +210,32 @@ const BillsForm = ()=>{
                     return(
                         <div key={i}>
                             <div class='row'>
-                                <div class='col'>
+                                <div class='col-4'>
                                     <label class="form-label">Product Name:</label>
                                     <Hint options={productname} >
-                                        <input class="form-control" type='text' value={item.name} placeholder='name of the product' name='name' onChange={(e)=>handlepurchase(e,i)} onBlur={handleproductdetails} />
+                                        <input class="form-control" type='text' value={item.name} placeholder='Name of the product' name='name' onChange={(e)=>handlepurchase(e,i)} onBlur={handleproductdetails} />
                                     </Hint>
                                 </div>
-                                <div class='col'>
+                                <div class='col-2'>
                                     <label class="form-label">Price:</label>
                                     <input type='number' class="form-control" value={item.price} name='price' disabled={true} />
                                 </div>
-                             </div> 
 
-                            <div class='row'>
-                                <div class='col'>
+                                <div class='col-2'>
                                     <label class="form-label"> Quantity:</label>
                                     <input type='number' class="form-control" value={item.quantity} name='quantity' onChange={(e)=>handlepurchase(e,i)} />
                                 </div>
-                                <div class='col'>
+                                <div class='col-2'>
                                     <label class="form-label">Subtotal:</label>
                                     <input type='number' class="form-control" disabled={true} value={item.subtotal} />
                                 </div>
                                 <div class='col pt-2'>
-                                    <button class=' ms-5' onClick={(e)=>handleRemove(i)} style={{border:'transparent', backgroundColor:'white', fontSize:'2rem'}}><AiOutlineMinusCircle/></button>
+                                    <button class=' ms- mt-3' onClick={(e)=>handleRemove(i)} style={{border:'transparent', backgroundColor:'white', fontSize:'2rem'}}><AiOutlineMinusCircle/></button>
                                 </div> 
+                             </div> 
+
+                            <div class='row'>
+                                
                             </div> 
                             
                         </div>
@@ -243,17 +244,15 @@ const BillsForm = ()=>{
             }
             <button onClick={handleaddproduct} class="btn btn-secondary m-2">Add Product</button>
             <br/>
-            <label class="form-label">TotalAmount:</label>
-            <input type='number' class="form-control" value={totalAmount}/>
-            <br/>
-            <form>
-            {/* <Button variant="primary" onClick={() => setModalShow(true)}>
-                submit
-            </Button>
-
-            <ViewBill id={} show={modalShow} onHide={() => setModalShow(false)} />             */}
-            <input class="btn btn-success" type='submit'/>
-      </form>
+            <div class='text-end'>
+            <label >TotalAmount:</label>
+            <input type='number' disabled={true} value={totalAmount}/>
+            </div>
+            
+            <div class='text-end m-2'>
+            <input class="btn btn-success" onClick={handleSubmit} type='submit'/>
+            </div>
+      
     </div>
 }
 

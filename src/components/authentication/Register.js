@@ -4,6 +4,7 @@ import { useFormik, yupToFormErrors } from 'formik';
 import * as Yup from 'yup';
 import {  postMethodRegister, stateRegister } from '../../action/postmethod';
 import { useDispatch, useSelector } from 'react-redux';
+import Homepage from '../Homepage';
 
 
 const Register = (props)=>{
@@ -44,18 +45,28 @@ useEffect(()=>{
         onSubmit: (values, {resetForm}) => {
            // console.log(values)
             dispatch(postMethodRegister(values))
+            props.history.path.push('./login')
             resetForm({values : ''})
         },
       });
 
     return (
+        <div class='row'>
+        <div class='col'>
+            <Homepage/>
+        </div>
+        <div class='col'>
+
+       
         <div class="logregpage">
         <div class="border">
             <h2 style={{textAlign:'center'}}>Register form</h2>
             <form onSubmit={formik.handleSubmit}>
+                
                 <div class='mt-5'>
-                <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control is-valid" id="username" 
+                
+                <label for="username" class="form-label">Username*</label>
+                    <input type="text" class="form-control" id="username" 
                         placeholder='enter username'
                                 name='username'
                                 onChange={formik.handleChange}
@@ -66,7 +77,7 @@ useEffect(()=>{
                             required/>
                     <div>
                             {formik.touched.username && formik.errors.username ? (
-                                <small>{formik.errors.username}</small>
+                                <small style={{color:'red'}}>{formik.errors.username}</small>
                             ) : null}
                         
                     </div>
@@ -97,9 +108,9 @@ useEffect(()=>{
                                                                     </div> */}
                                                                     
                 <div class='mt-3'>
-                    <label for="validationServer02" class="form-label">Email</label>
+                    <label for="validationServer02" class="form-label">Email*</label>
 
-                    <input type="text" class="form-control is-valid" id="validationServer02" 
+                    <input type="text" class="form-control" id="validationServer02" 
                        
                         placeholder='enter email'
                         name='email'
@@ -110,14 +121,14 @@ useEffect(()=>{
                     required/> 
                     
                     {formik.touched.email && formik.errors.email ? (
-                        <small>{formik.errors.email}</small>
+                        <small style={{color:'red'}}>{formik.errors.email}</small>
                     ) : null}
                 </div>
 
                 <div class='mt-3'>
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label">Password*</label>
 
-                    <input  class="form-control is-valid" id="password" 
+                    <input  class="form-control" id="password" 
                             type='password'
                             placeholder='enter password'
                             name='password'
@@ -127,7 +138,7 @@ useEffect(()=>{
                             style={formik.touched.password && formik.errors.password && {borderColor:"red"}}      
                     required/>
                         {formik.touched.password && formik.errors.password ? (
-                            <small>{formik.errors.password}</small>
+                            <small style={{color:'red'}}>{formik.errors.password}</small>
                         ) : null}
                 </div>
                 <div class='mt-3'>
@@ -143,7 +154,7 @@ useEffect(()=>{
                             style={formik.touched.businessName && formik.errors.businessName && {borderColor:"red"}}      
                     required    />
                         {formik.touched.businessName && formik.errors.businessName ? (
-                            <small>{formik.errors.businessName}</small>
+                            <small style={{color:'red'}}>{formik.errors.businessName}</small>
                         ) : null}
                 </div>
 
@@ -160,13 +171,15 @@ useEffect(()=>{
                         style={formik.touched.address && formik.errors.address && {borderColor:"red"}}      
                 required   />
                     {formik.touched.address && formik.errors.address ? (
-                        <small>{formik.errors.address}</small>
+                        <small style={{color:'red'}}>{formik.errors.address}</small>
                     ) : null}
                 </div>
                 
                 <input type='submit' class="btn btn-primary mt-3"/>
                 <hr/><p style={{textAlign:'center'}}>Have a account?<Link to='/login'>signIn</Link></p>
             </form>
+        </div>
+        </div>
         </div>
         </div>
     )

@@ -1,16 +1,16 @@
-import axios from 'axios'
+import axios from '../config/axiosConfig'
 
 //get method
 export const asynProductGet = ()=>{
     return(dispatch)=>{
-        axios.get(`http://dct-billing-app.herokuapp.com/api/products`,{
-            headers:{
-                'Authorization':`bearer ${localStorage.getItem('token')}`
-            }
-        })
+        axios.get(`/api/products`,)
             .then((response)=>{
-                //console.log(response.data)
-                dispatch(productsgetAction(response.data))
+                const result = response.data
+                if(result.hasOwnProperty('errors')){
+                    console.log(result.errors)
+                }
+                else
+                    dispatch(productsgetAction(result))
             })
             .catch((err)=>{
                 console.log(err.message)
@@ -29,14 +29,13 @@ export const productsgetAction = (data)=>{
 //add producr post
 export const asynAddProduct = (formData)=>{
     return (dispatch)=>{
-        axios.post(`http://dct-billing-app.herokuapp.com/api/products`,formData,{
-            headers:{
-                'Authorization':`bearer ${localStorage.getItem('token')}`
-            }
-        })
+        axios.post(`/api/products`,formData)
             .then((response)=>{
                 const data = response.data
-                //console.log(data)
+                if(data.hasOwnProperty('errors')){
+                    console.log(data.errors)
+                }
+                else
                 dispatch(addProductAction(data))
             })
             .catch((err)=>{
@@ -56,13 +55,13 @@ export const addProductAction = (data)=>{
 //delete a product
 export const asynDeleteProduct = (id)=>{
     return(dispatch)=>{
-        axios.delete(`http://dct-billing-app.herokuapp.com/api/products/${id}`,{
-            headers:{
-                'Authorization':`bearer ${localStorage.getItem('token')}`
-            }
-        })
+        axios.delete(`/api/products/${id}`)
             .then((response)=>{
                 const data = response.data
+                if(data.hasOwnProperty('errors')){
+                    console.log(data.errors)
+                }
+                else
                 dispatch(deleteProductAction(data))
             })
             .catch((err)=>{
@@ -81,14 +80,13 @@ export const deleteProductAction = (data)=>{
 
 export const asynEditProduct = (product, id)=>{
     return (dispatch)=>{
-        axios.put(`http://dct-billing-app.herokuapp.com/api/products/${id}`,product,{
-            headers:{
-                'Authorization':`bearer ${localStorage.getItem('token')}`
-            }
-        })
+        axios.put(`/api/products/${id}`,product)
             .then((response)=>{
                 const data = response.data
-                console.log(data)
+                if(data.hasOwnProperty('errors')){
+                    console.log(data.errors)
+                }
+                else
                 dispatch(editeProductAction(data))
             })
             .catch((err)=>{

@@ -1,15 +1,14 @@
-import axios from 'axios'
+import axios from '../config/axiosConfig'
 
 export const getCustomers = ()=>{
     return (dispatch)=>{
-        axios.get('http://dct-billing-app.herokuapp.com/api/customers',{
-                headers:{
-                    'Authorization':`bearer ${localStorage.getItem('token')}`
-                }
-            })
+        axios.get('/api/customers')
             .then((response)=>{
                 const result=response.data
-               // console.log(result)
+                if(result.hasOwnProperty('errors')){
+                    console.log(result.errors)
+                }
+                else
                 dispatch(customersList(result))
 
             })
@@ -30,11 +29,7 @@ export const customersList = (result)=>{
 export const AddCustomerPost = (formData)=>{
     //console.log(formData)
     return (dispatch)=>{
-                axios.post(' http://dct-billing-app.herokuapp.com/api/customers',formData,{
-                    headers:{
-                        'Authorization':`bearer ${localStorage.getItem('token')}`
-                    }
-                })
+                axios.post('/api/customers',formData)
                         .then((response)=>{
                             const result=(response.data)
                             if(result.hasOwnProperty('errors')){
@@ -60,18 +55,19 @@ export const addCustomerAction = (result)=>{
 
 export const deleteCustomer= (customer)=>{
     return (dispatch)=>{
-        axios.delete(`http://dct-billing-app.herokuapp.com/api/customers/${customer._id}`,{
-            headers:{
-                'Authorization':`bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then((response)=>{
-            const id=response.data._id
-            dispatch(deleteCustomerAction(id))
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
+        axios.delete(`/api/customers/${customer._id}`)
+            .then((response)=>{
+                const id=response.data._id
+                const result = response.data
+                if(result.hasOwnProperty('errors')){
+                    console.log(result.errors)
+                }
+                else
+                dispatch(deleteCustomerAction(id))
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
     }
 }
 
@@ -84,13 +80,14 @@ export const deleteCustomerAction = (id)=>{
 
 export const editCustomer = (formData,id)=>{
     return(dispatch)=>{
-        axios.put(`http://dct-billing-app.herokuapp.com/api/customers/${id}`,formData,{
-            headers:{
-                'Authorization':`bearer ${localStorage.getItem('token')}`
-            }
-        })
+        axios.put(`/api/customers/${id}`,formData)
         .then((response)=>{
-            dispatch(editCustomerAction(response.data))
+            const result = response.data
+            if(result.hasOwnProperty('errors')){
+                console.log(result.errors)
+            }
+            else
+            dispatch(editCustomerAction(result))
         })
         .catch((err)=>{
             console.log(err.message)

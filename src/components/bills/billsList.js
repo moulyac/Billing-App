@@ -130,7 +130,7 @@ export const ViewBill = (props)=>{
                {
                     productd.map((p,i)=>{
                         return <tr>
-                            <th scope="row">{i}</th>
+                            <th scope="row">{i+1}</th>
                             <td>{p.name}</td>
                             <td> {p.price} </td>
                             <td> {p.quantity} </td>

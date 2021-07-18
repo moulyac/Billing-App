@@ -8,8 +8,9 @@ import { asynBillGet } from './action/billsAction'
 import { asynProductGet } from './action/productAction'
 import { getCustomers } from './action/customerActions'
 import { accountGetMethod } from './action/userGetMethod'
+import { propTypes } from 'react-bootstrap/esm/Image'
 
-const App=()=>{
+const App=(props)=>{
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -24,9 +25,7 @@ const App=()=>{
 
     return (
          <div>
-
             <Home/>
-            
         </div>
     )
 }

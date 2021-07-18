@@ -1,16 +1,16 @@
-import axios from 'axios'
+import axios from '../config/axiosConfig'
 
 export const accountGetMethod = ()=>{
     return (dispatch)=>{
-        axios.get('http://dct-billing-app.herokuapp.com/api/users/account',{
-                headers:{
-                    'Authorization':`bearer ${localStorage.getItem('token')}`
-                }
-        })
+        axios.get('/api/users/account')
             .then((response)=>{
-                const result=response.data
-                console.log(result)
-                dispatch(userAccount(result))
+               
+            const result = response.data
+            if(result.hasOwnProperty('errors')){
+                console.log(result.errors)
+            }
+            else
+            dispatch(userAccount(result))
 
             })
             .catch((err)=>{

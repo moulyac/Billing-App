@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, Route, withRouter, Redirect } from 'react-router-dom'
 import Login from './authentication/Login'
 import Register from './authentication/Register'
@@ -10,75 +10,88 @@ import Customer from './Customer'
 import Product from './products/products'
 import Bills from './bills/bills'
 import {ViewBill} from './bills/billsList'
+import Dashboard from './user/Dashboard'
 
 const Home = (props)=>{
     const login = useSelector((state)=>{
         return state.userLogin
     })
     const dispatch = useDispatch()
+   
+
+    const link = {
+        textDecoration: 'none',
+        color:'black',
+        padding:'0px 5px'
+    }
     return (
         <div>
             {
                 !login&&
                 <div>
+                    
                     <div class='row'>
-                    <div class='col'>
-                        <Link to='/' >ProcessPro</Link>
-                    </div>
-                    <div class='col' >
-                     
-                        <ul  class="nav  justify-content-end" >
-                            
-                            <li class="nav-item"><Link class="nav-link" to='/login'>SignIn</Link></li>
-                            <li class="nav-item"><Link class="nav-link" to='/register'> SignUp</Link></li> 
-                            
-                            
-                        </ul>
+                    
+                        <div class='col'>
+                            <Link to='/' class='fs-3 ms-4' style={{TextDecoder:'none'}} >ProcessPro</Link>
+                        </div>
+                        <div class='col' >
                         
-                    </div>
-                    </div>
+                            <ul  class="nav  justify-content-end" >
+                                
+                                <li class="nav-item"><Link class="nav-link" to='/login'>SignIn</Link></li>
+                                <li class="nav-item"><Link class="nav-link" to='/register'> SignUp</Link></li> 
+                            </ul>
+                        </div>
+                
+                    </div> 
                     <div>
-                    <Route path='/' component={Homepage} exact={true}/>
-                    <Route path='/login' component={Login} exact={true} />
-                    <Route path='/register' component={Register} exact={true}/>
+                        <Route path='/' component={Homepage} exact={true}/>
+                        <Route path='/login' component={Login} exact={true} />
+                        <Route path='/register' component={Register} exact={true}/>
                     </div>
-                </div>
-            }
-            
 
+                </div> 
+            }
             {
                 login &&
                 <div>
-                    <div class='row' style={{backgroundColor: '#e3f2fd'}}>
-                     <div class='col mx-5'>
-                        <h1 style={{color:'#ff7600e8'}} class="fs-1">ProcessPro</h1>
-                    </div> 
-                    <div class='col'>
-                        <ul  class="nav navbar-light justify-content-end"   >
-                           
-                           
-                            <li class="nav-item"><Link class="nav-link"  to='/customer'> Customer</Link></li>
-                            <li class="nav-item"><Link class="nav-link"  to='/product'> Product</Link></li>
-                            <li class="nav-item"><Link class="nav-link"  to='/bills'> Bills</Link></li>
-                            <li class="nav-item"> <Link class="nav-link" to='/account'>Account</Link> </li>
-                            <li class="nav-item"><Link class="nav-link"onClick={()=>{
-                                    localStorage.removeItem('token')
-                                    dispatch(stateLogin(false))
-                                    props.history.push('/')
-                                    alert('successfully logged out')
-                                }}
-                            > Logout</Link>
-                            </li>
+
+                    <div class='row align-items-center d-flex justify-content-between px-2' style={{backgroundColor: '#e3f2fd'}}>
+                        <div class='col-8'>
+                            <h1 class="fs-1"><Link to='/dashboard' style={{color:'#ff7600e8', textDecoration:'none'}}>ProcessPro</Link></h1>
+                        </div> 
+                        <div class='col-4 text-end'>
+
                             
-                           
-                        </ul>
-                    </div>
+                            
+                                <Link style={link}  to='/customer'> Customer</Link>
+                                <Link style={link} to='/product'> Product</Link>
+                                <Link style={link}  to='/bills'> Bills</Link>
+                                <Link style={link} to='/account'>Account</Link>
+                                <Link style={link}  onClick={()=>{
+                                        localStorage.removeItem('token')
+                                        dispatch(stateLogin(false))
+                                        props.history.push('/')
+                                        alert('successfully logged out')
+                                        window.location.reload()
+                                    }}
+                                > Logout</Link>
+                                
+                            
+                            
+                        </div>
                     </div> 
                     
                     
                         
 
                     <div class='row container m-4'>
+
+                        <Route path='/dashboard' render={(props)=>{
+                            return login? <Dashboard {...props} /> : <Login {...props}
+                            />
+                        }}/>
 
                         <Route path='/account' render={(props)=>{
                             return login? <Account {...props} /> : <Login {...props}
