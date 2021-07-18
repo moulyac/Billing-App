@@ -1,4 +1,5 @@
 import axios from '../config/axiosConfig'
+import { swal, swalAuthAlert } from '../selector'
 
 export const postMethodRegister = (values)=>{
     return (dispatch)=>{
@@ -7,10 +8,10 @@ export const postMethodRegister = (values)=>{
                 const result=(response.data)
                 if(result.hasOwnProperty('errors')){
                     console.log(result.errors)
-                    alert(result.errors)
+                    swal(result.errors)
                 }
                 else{
-                    console.log(response.data)
+                    swalAuthAlert('Successfully registered')
                     dispatch(stateRegister(true))
                 }
             })
@@ -28,21 +29,21 @@ export const stateRegister = (b)=>{
 }
 
 
-export const postMethodLogin = (formData,history)=>{
+export const postMethodLogin = (formData,logintodashboardpage,handleserverError)=>{
     return (dispatch)=>{
         axios.post('/api/users/login',formData)
             .then((response)=>{
                 const result=(response.data)
                 if(result.hasOwnProperty('errors')){
                     console.log(result.errors)
-                    alert(result.errors)
+                    handleserverError(result.errors)
                 }else{
-                    console.log(result.token)
+                    //console.log(result.token)
                     dispatch(stateLogin(true))
+                    logintodashboardpage()
+                    swalAuthAlert('Successfully logged in' )
                     localStorage.setItem('token',result.token)
-                    alert('successfully logged in' )
                     window.location.reload()
-                    history('/dashboard')
                 }
             })
             .catch((err)=>{

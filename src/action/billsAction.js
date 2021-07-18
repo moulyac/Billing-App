@@ -1,4 +1,5 @@
 import axios from '../config/axiosConfig'
+import { swal } from '../selector'
 
 export const asynBillGet = ()=>{
     return (dispatch)=>{
@@ -6,7 +7,7 @@ export const asynBillGet = ()=>{
             .then((response)=>{
                 const result=response.data
                 if(result.hasOwnProperty('errors'))
-                alert(result.errors)
+                swal(result.errors)
                 else
                 dispatch(billsgetAction(result))
 
@@ -34,9 +35,11 @@ export const asynBillPost = (billdata)=>{
             const data = response.data
             
             if(data.hasOwnProperty('errors'))
-                alert(data.errors)
-            else
-            dispatch(billPostAction(data))
+                swal(data.message)
+            else{
+                swal('Bill added successfully:)')
+                dispatch(billPostAction(data))
+            }
         })
         .catch((err)=>{
             console.log(err.message)
@@ -57,7 +60,7 @@ export const asynBillDelete = (id)=>{
         .then((response)=>{
             const data = response.data 
             if(data.hasOwnProperty('errors'))
-                alert(data.errors)
+                swal(data.errors)
             else
             dispatch(billDeleteAction(data))
         })

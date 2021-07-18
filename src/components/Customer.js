@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Modal } from 'react-bootstrap'
 import { AddCustomerPost, deleteCustomer, getCustomers, editCustomer } from '../action/customerActions'
+import Swal from 'sweetalert2'
+import { swal } from '../selector'
 
 const Customer =()=>{
     const [addCustomer, setCustomer] = useState({})
@@ -39,7 +41,20 @@ const Customer =()=>{
         setedit({})
     }
     const handleDelete = (customer)=>{
-        dispatch(deleteCustomer(customer))
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteCustomer(customer))
+                swal('successfully deleted')
+            }
+          })
     }
     const handleEdit = (customer)=>{
         //console.log(customer)
@@ -94,8 +109,8 @@ const Customer =()=>{
                         <div class='col'>
                             <h1>Customers List - {customers.length}</h1>
                         </div>
-                        <div class='col p-2'>
-                            <input type='search' className='searchbar'  placeholder='Search by mobile number' value={searchText} onChange={handlesearch} />
+                        <div class='col-5 p-2'>
+                            <input type='search' class="form-control"   placeholder='Search by mobile number' value={searchText} onChange={handlesearch} />
                         </div>
                     </div>
                 <div class='row'>   
@@ -170,20 +185,20 @@ const AddCustomer = ({ customerformData, editcustomer, buttonName})=>{
     }
     const hanldeSubmit=(e)=>{
         e.preventDefault()
-        if(name && mobile){
+        if(name && mobile.length==10){
         const formData = {
             name:name,
             mobile:mobile,
             email:email
         }
         customerformData(formData)
-        alert(`The customer details have been ${buttonName}ed successfully:)`)
+       // alert(`The customer details have been ${buttonName}ed successfully:)`)
         setname('')
         setemail('')
         setmobile('')
-    }else{
-        alert('Customer name and mobile number are mandatory!!')
-    }
+        }else{
+            swal('Customer name and mobile number are mandatory and mobile number should be 10digits!!')
+        }
     }
     
     return (

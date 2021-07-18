@@ -1,4 +1,5 @@
 import axios from '../config/axiosConfig'
+import { swal } from '../selector'
 
 //get method
 export const asynProductGet = ()=>{
@@ -33,10 +34,13 @@ export const asynAddProduct = (formData)=>{
             .then((response)=>{
                 const data = response.data
                 if(data.hasOwnProperty('errors')){
-                    console.log(data.errors)
+                    swal(data.message)
                 }
-                else
-                dispatch(addProductAction(data))
+                else{
+                    swal('Product added')
+                    dispatch(addProductAction(data))
+                }
+                
             })
             .catch((err)=>{
                 console.log(err)

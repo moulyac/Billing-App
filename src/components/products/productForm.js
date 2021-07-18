@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { asynAddProduct, asynEditProduct } from '../../action/productAction'
+import { swal } from '../../selector'
 
 const ProductForm = ({handleaddproduct, editProduct, callbacksetEditproduct, id})=>{
     const [name, setname] = useState(editProduct? editProduct.name :  '')
@@ -15,14 +16,17 @@ const ProductForm = ({handleaddproduct, editProduct, callbacksetEditproduct, id}
             price: price
         }
         //console.log(formDate)
-        if(editProduct && Object.keys(editProduct).length>0){
-            dispatch(asynEditProduct(formDate, id))
-            callbacksetEditproduct()
-            alert('The product is updated successfully')
-        }else{
-            dispatch(asynAddProduct(formDate))
-            alert('The product is added successfully')
-            handleaddproduct()
+        if(name && price){
+            if(editProduct && Object.keys(editProduct).length>0){
+                dispatch(asynEditProduct(formDate, id))
+                callbacksetEditproduct()
+            }else{
+                dispatch(asynAddProduct(formDate))
+                handleaddproduct()
+            }
+        }
+        else{
+            swal('name and price are mandatory!!')
         }
         setname('')
         setprice(0)
@@ -41,7 +45,7 @@ const ProductForm = ({handleaddproduct, editProduct, callbacksetEditproduct, id}
         <div class='mt-3'>
             <form onSubmit={handlesubmit}>
                 <div class="mb-3">
-                    <label for="productname" class="form-label">Product Name</label>
+                    <label for="productname" class="form-label">Product Name*</label>
                     <input type="text" class="form-control" id="productname"
                         value={name} 
                         name='name'
@@ -50,7 +54,7 @@ const ProductForm = ({handleaddproduct, editProduct, callbacksetEditproduct, id}
                 </div>
 
                 <div class="mb-3">
-                    <label for="productprice" class="form-label">Product Price</label>
+                    <label for="productprice" class="form-label">Product Price*</label>
                     <input type="number" class="form-control" id="productname"
                         value={price}
                         name='price'

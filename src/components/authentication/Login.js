@@ -8,6 +8,7 @@ import Homepage from '../Homepage'
 const Login = (props)=>{
     const [email, setEmail]= useState('')
     const [password, setPassword]= useState('')
+    const [serverError, setserverError] = useState('')
 
     const login = useSelector((state)=>{
         return state.userLogin
@@ -23,8 +24,13 @@ const Login = (props)=>{
             password: password
         }
         //console.log(formData)
-
-        dispatch(postMethodLogin(formData,props.history.push))
+        const logintodashboardpage = ()=>{
+            props.history.push('/dashboard')
+        }
+        const handleserverError = (err)=>{
+            setserverError(err)
+        }
+        dispatch(postMethodLogin(formData, logintodashboardpage, handleserverError))
     }
 
     const handleChange = (e)=>{
@@ -64,6 +70,7 @@ const Login = (props)=>{
                                 name='password'
                                 onChange={handleChange}
                             />
+                            <span>{serverError}</span>
                         </div>
                         
                         <button type="submit" class="btn btn-primary">Login</button>

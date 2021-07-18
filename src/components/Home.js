@@ -11,6 +11,7 @@ import Product from './products/products'
 import Bills from './bills/bills'
 import {ViewBill} from './bills/billsList'
 import Dashboard from './user/Dashboard'
+import { swalAuthAlert } from '../selector'
 
 const Home = (props)=>{
     const login = useSelector((state)=>{
@@ -73,7 +74,7 @@ const Home = (props)=>{
                                         localStorage.removeItem('token')
                                         dispatch(stateLogin(false))
                                         props.history.push('/')
-                                        alert('successfully logged out')
+                                        swalAuthAlert('Successfully logged out')
                                         window.location.reload()
                                     }}
                                 > Logout</Link>

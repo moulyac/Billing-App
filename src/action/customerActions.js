@@ -1,4 +1,5 @@
 import axios from '../config/axiosConfig'
+import { swal } from '../selector'
 
 export const getCustomers = ()=>{
     return (dispatch)=>{
@@ -33,10 +34,10 @@ export const AddCustomerPost = (formData)=>{
                         .then((response)=>{
                             const result=(response.data)
                             if(result.hasOwnProperty('errors')){
-                                console.log(result.errors)
+                                swal(result.message)
                             }
                             else{
-                               // console.log(result)
+                                swal('Customer added')
                                 dispatch(addCustomerAction(result))
                             }
                         })
@@ -86,8 +87,10 @@ export const editCustomer = (formData,id)=>{
             if(result.hasOwnProperty('errors')){
                 console.log(result.errors)
             }
-            else
-            dispatch(editCustomerAction(result))
+            else{
+                swal('Customer updated succssfully:)')
+                dispatch(editCustomerAction(result))
+            }
         })
         .catch((err)=>{
             console.log(err.message)

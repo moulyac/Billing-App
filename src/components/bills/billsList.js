@@ -4,6 +4,8 @@ import {Link, Route} from 'react-router-dom'
 import { asynBillDelete, asynBillGet } from '../../action/billsAction'
 import { asynProductGet } from '../../action/productAction'
 import { getCustomers } from '../../action/customerActions';
+import Swal from 'sweetalert2'
+import { swal } from '../../selector'
  
  export const BillsList = ()=>{
     const bills = useSelector((state)=>{
@@ -25,10 +27,23 @@ import { getCustomers } from '../../action/customerActions';
             return cusId == customer._id
         })
         //console.log( 'cu ',customer.name)
-        return customer.name
+        return customer? customer.name : ''
     }
     const handleDelete = (id)=>{
-        dispatch(asynBillDelete(id))
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(asynBillDelete(id))
+                swal('successfully deleted')
+            }
+          })
     }
     return <div class='container'>
         <h2>All Bills - {bills.length} </h2>
@@ -87,15 +102,14 @@ export const ViewBill = (props)=>{
         //console.log(customer)
         return cust._id == customer
     })
-// console.log('cust',customers)
-     //console.log('id',customerd)
 
-     const productd = lineItems.map((item)=>{
-         const prodd = products.find((p)=>{
-             return p._id == item.product
-         })
-         return {...prodd,quantity:item.quantity,subTotal:item.subTotal}
-     })
+
+    const productd = lineItems.map((item)=>{
+        const prodd = products.find((p)=>{
+            return p._id == item.product
+        })
+        return {...prodd,quantity:item.quantity,subTotal:item.subTotal}
+    })
 
      //console.log(productd)
     
@@ -114,7 +128,7 @@ export const ViewBill = (props)=>{
                     </div>
                 </div>
 
-            <h2>Customer : {customerd.name}</h2>
+            <h2>Customer : {customerd? customerd.name: ''}</h2>
 
             <table class="table">
                 <thead>
