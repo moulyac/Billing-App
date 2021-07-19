@@ -73,7 +73,7 @@ const Customer =()=>{
         <div class='container'>
             <div class='row'>
             <div class='col'>
-            <h1>Customer :</h1>
+            <h1>Customer </h1>
             </div>
             <div class='col text-end p-2'>
             <Button variant="primary" onClick={handleShow}>
@@ -103,11 +103,11 @@ const Customer =()=>{
             </Modal.Footer>
         </Modal>
 
-            <div class='container'>
+            <div class='container mt-5'>
                 
                     <div class='row'>
                         <div class='col'>
-                            <h1>Customers List - {customers.length}</h1>
+                            <h2>Customers List - {customers.length}</h2>
                         </div>
                         <div class='col-5 p-2'>
                             <input type='search' class="form-control"   placeholder='Search by mobile number' value={searchText} onChange={handlesearch} />
@@ -115,7 +115,7 @@ const Customer =()=>{
                     </div>
                 <div class='row'>   
                     <div class='col'>
-                    <div class='container my-5'>
+                    <div class='container my-2'>
                     {
                         searchList.length>0? (
                             searchList.map((customer)=>{

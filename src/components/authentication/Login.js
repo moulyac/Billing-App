@@ -42,11 +42,11 @@ const Login = (props)=>{
         }
     }
     //console.log(login)
-    return<div class='row'>
+    return<div class='row '>
         <div class='col'>
             <Homepage/>
         </div>
-        <div class='col'>
+        <div class='col animate__animated animate__zoomIn'>
     <div  class='logregpage'>
             <div class='border'>
                 <h2 style={{ textAlign:'center'}} class='mb-5'>Login Form</h2>

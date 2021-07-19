@@ -45,9 +45,9 @@ import { swal } from '../../selector'
             }
           })
     }
-    return <div class='container'>
+    return <div class='container mt-5'>
         <h2>All Bills - {bills.length} </h2>
-        <div class='container'>
+        <div class='container mt-3'>
         {
             bills.map((bill)=>{
                 return <div key={bill._id}>

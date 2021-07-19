@@ -104,11 +104,11 @@ const ProductsList = ()=>{
     }
 
     return(
-        <div class='container'>
+        <div class='container mt-5'>
             
                 <div class='row'>
                     <div class='col'>
-                        <h1>Products List : {products.length} </h1>
+                        <h2>Products List : {products.length} </h2>
                     </div>
                     <div class='col p-1'>
                         <input type='serach' class="form-control"  placeholder='Search by product name' value={searchText} onChange={handlesearch} />
@@ -132,7 +132,7 @@ const ProductsList = ()=>{
 
             <div class='row'>
             <div class='col'>
-               <div class='container my-5'>
+               <div class='container mb-5 mt-3'>
                 {
                    
                         products.map((product)=>{

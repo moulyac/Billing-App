@@ -11,7 +11,7 @@ const Bills = ()=>{
     })
     
 
-    const id=bills[bills.length-1]._id
+    const id=bills.length>0? bills[bills.length-1]._id : ''
     
     const [show, setShow] = useState(false);
 

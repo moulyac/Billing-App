@@ -9,11 +9,7 @@ import { Button, Modal, CloseButton } from 'react-bootstrap'
 const Product = ()=>{
     const [addproduct, setaddproduct] = useState(false)
     const [show, setShow] = useState(false);
-    // const [alert, setalert] =useState(false)
-    // const handlealert = ()=>{
-    //     setalert(!alert)
-    // }
-
+   
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -29,7 +25,7 @@ const Product = ()=>{
         <div class='container'>
             <div class='row'>
               <div class='col'>
-                <h1> Products :</h1>
+                <h1> Products </h1>
               </div>
               <div class='col text-end p-2'>
                 <Button variant="primary" onClick={handleShow}>

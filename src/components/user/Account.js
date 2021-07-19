@@ -21,7 +21,7 @@ const Account = (props)=>{
                 <h3><>Name</> - {user.username}</h3>
                 <h3><>Business Name</> - {user.businessName}</h3>
                 <h3><>Address</> - {user.address}</h3>
-
+             <h3><>Date created</> - {user.createdAt.split('T')[0]}</h3>
             </div>
             
         </div>

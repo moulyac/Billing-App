@@ -12,6 +12,7 @@ import Bills from './bills/bills'
 import {ViewBill} from './bills/billsList'
 import Dashboard from './user/Dashboard'
 import { swalAuthAlert } from '../selector'
+import MainPage from './user/dashboard/mainpage'
 
 const Home = (props)=>{
     const login = useSelector((state)=>{
@@ -47,9 +48,11 @@ const Home = (props)=>{
                 
                     </div> 
                     <div>
+ 
                         <Route path='/' component={Homepage} exact={true}/>
                         <Route path='/login' component={Login} exact={true} />
                         <Route path='/register' component={Register} exact={true}/>
+                       
                     </div>
 
                 </div> 
@@ -59,10 +62,10 @@ const Home = (props)=>{
                 <div>
 
                     <div class='row align-items-center d-flex justify-content-between px-2' style={{backgroundColor: '#e3f2fd'}}>
-                        <div class='col-8'>
-                            <h1 class="fs-1"><Link to='/dashboard' style={{color:'#ff7600e8', textDecoration:'none'}}>ProcessPro</Link></h1>
+                        <div class='col-3'>
+                            <h1 style={{fontSize:'4rem'}}><Link to='/dashboard' style={{color:'#ff7600e8', textDecoration:'none'}}>ProcessPro</Link></h1>
                         </div> 
-                        <div class='col-4 text-end'>
+                        <div class='col-5 text-end' style={{fontSize:'1.5rem'}}>
 
                             
                             
@@ -83,14 +86,11 @@ const Home = (props)=>{
                             
                         </div>
                     </div> 
-                    
-                    
-                        
 
                     <div class='row container m-4'>
 
                         <Route path='/dashboard' render={(props)=>{
-                            return login? <Dashboard {...props} /> : <Login {...props}
+                            return login? <MainPage {...props} /> : <Login {...props}
                             />
                         }}/>
 

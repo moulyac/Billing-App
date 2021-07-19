@@ -1,7 +1,7 @@
 const Homepage = ()=>{
     const imgpath = 'https://uploads-ssl.webflow.com/5e3ce2ec7f6e53c045fe7cfa/603dd39e1da857523f684124_Frame-21.png'
     return (
-        <div class='row'>
+        <div class='row animate__animated animate__slideInRight'>
             <div class='col'>
             <img src={imgpath} alt='image not found' />
             </div>

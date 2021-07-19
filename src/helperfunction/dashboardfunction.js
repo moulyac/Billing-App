@@ -4,7 +4,7 @@ export const billsPerDay = (bills)=>{
     const dateadded= []
 
     bills.forEach((bill)=>{
-         if(filterByDate.length < 4)
+        if(filterByDate.length < 5)
             if(!dateadded.includes(bill.date)){
                 dateadded.push(bill.date)
                 const res = bills.filter((b)=>{
@@ -59,51 +59,79 @@ export const salesPercentage = (no, bills)=>{
     return Math.round(percentage)
 }
 
-export const top5product = (bills, products)=>{
-    console.log(bills,products)
-    const prods = products
-    let psd =[]
-    const product =[]
+const productfreq = (bills, products)=>{
+    const result = products.map((p)=>{
+        let obj = {}
+        obj.name = p.name
+        obj.price = p.price
+        obj.count = 0
 
-    bills.forEach((bill)=>{
-        bill.lineItems.forEach((item)=>{
-            prods.forEach((p)=>{
-                if(p._id == item.product){
-                    if(!product.includes(p._id)){
-                        product.push(p._id)
-                        const obj ={
-                            id:p._id,
-                            name:p.name,
-                            price:p.price,
-                            quantity: item.quantity
-                        }
-                        psd.push(obj)
-                    }
-                    else{
-                        const res = psd.map((psdp)=>{
-                            if(p._id == psdp.id){
-                                return {...psdp,quantity:psdp.quantity+item.quantity}
-                            }else{
-                                return{...psdp}
-                            }
-                        })
-                        psd =[...res]
-                    }
-                }
+        bills.forEach((b)=>{
+            const res = b.lineItems.find((item)=>{
+                return item.product == p._id
             })
+           // console.log(res)
+            if(res){
+                obj.count += res.quantity
+            }
         })
+        return obj
     })
-    const res = psd.map((p)=>{
-        return p.quantity
-    })
-    
-    const sorted = psd.sort ((a,b)=>{
-        return (b.quantity - a.quantity)
+//console.log(result)
+    return [...result]
+
+}
+
+export const top5product = (bills, products)=>{
+    const freq = productfreq(bills,products)
+   
+    const sorted = freq.sort ((a,b)=>{
+        return (b.count - a.count)
     })
     const result =[]
     for(let i=0;i<5;i++){
         result.push(sorted[i])
     }
+    
+    return result.length ? [...result] : []
+}
+
+export const least5Product = (bills, products)=>{
+    const result = productfreq(bills,products)
+    
+    const notsold=result.filter((p)=>{
+        return p.count == 0
+    })
+    //console.log('not',notsold)
+   return notsold.length ? notsold : []
+}
+
+export const top5customers = (bills, customers)=>{
+    const customerfreq = []
+
+    customers.forEach((c)=>{
+        const freq = bills.filter((b)=>{
+            return c._id == b.customer
+        })
+        customerfreq.push(freq)
+    })
+
+    const sorted = customerfreq.sort ((a,b)=>{
+        return (b.length - a.length)
+    })
+
+    //console.log('s',sorted)
+    const result =[]
+    for(let i=0;i<5;i++){
+        result.push(sorted[i])
+    }
     //console.log(result)
-    return result
+    return result 
+}
+
+export const customerName = (id,customers)=>{
+    const result = customers.find((c)=>{
+        return id == c._id
+    })
+    return result ? {...result} : {}
 }
