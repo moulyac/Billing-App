@@ -10,7 +10,6 @@ const Top5Products = ()=>{
      
     const result = top5product(bills,products)
     //console.log('m',result)
-
     const orders = result.map((r)=>{
         return r? { [r.name]:r.count }:{}
     })
@@ -27,9 +26,7 @@ const Top5Products = ()=>{
   
     function drawChart() {
         const data = GoogleCharts.api.visualization.arrayToDataTable(arr)                  
-        const options = {
-            
-        }
+        const options = { }
         const chart = new GoogleCharts.api.visualization.PieChart(document.getElementById('piechart'))
         chart.draw( data , options);
     }

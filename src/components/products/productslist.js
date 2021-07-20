@@ -131,7 +131,7 @@ const ProductsList = ()=>{
                 </div>
 
             <div class='row'>
-            <div class='col'>
+            <div class='col' style={{overflow:'scroll', height:'350px'}}>
                <div class='container mb-5 mt-3'>
                 {
                    
@@ -155,7 +155,7 @@ const ProductsList = ()=>{
                 </div>
             </div>
 
-            <div class='col p-5'>
+            <div class='col-5 p-5'>
                 {Object.keys(editProduct).length>0  && <ProductForm callbacksetEditproduct={callbacksetEditproduct} editProduct={editProduct} id={id} />
                 }
 

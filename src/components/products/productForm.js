@@ -5,7 +5,7 @@ import { swal } from '../../selector'
 
 const ProductForm = ({handleaddproduct, editProduct, callbacksetEditproduct, id})=>{
     const [name, setname] = useState(editProduct? editProduct.name :  '')
-    const [price, setprice] = useState(editProduct? editProduct.price : 0)
+    const [price, setprice] = useState(editProduct? editProduct.price : '')
    
     const dispatch = useDispatch()
 
@@ -29,7 +29,7 @@ const ProductForm = ({handleaddproduct, editProduct, callbacksetEditproduct, id}
             swal('name and price are mandatory!!')
         }
         setname('')
-        setprice(0)
+        setprice('')
     }
 
     const hanldeChange = (e)=>{

@@ -10,7 +10,6 @@ import Customer from './Customer'
 import Product from './products/products'
 import Bills from './bills/bills'
 import {ViewBill} from './bills/billsList'
-import Dashboard from './user/Dashboard'
 import { swalAuthAlert } from '../selector'
 import MainPage from './user/dashboard/mainpage'
 

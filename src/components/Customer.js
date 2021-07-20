@@ -114,8 +114,8 @@ const Customer =()=>{
                         </div>
                     </div>
                 <div class='row'>   
-                    <div class='col'>
-                    <div class='container my-2'>
+                    <div class='col' style={{overflow:'scroll', height:'350px'}}>
+                    <div class='container my-2' >
                     {
                         searchList.length>0? (
                             searchList.map((customer)=>{
@@ -153,7 +153,7 @@ const Customer =()=>{
                     }
                     </div>
                 </div>
-                <div class='col p-4'>
+                <div class='col-5 p-4'>
                     {
                         Object.keys(editcustomer).length>0 && <AddCustomer editcustomer={editcustomer} buttonName='Update' customerformData={customerformData} />
                     }

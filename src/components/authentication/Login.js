@@ -70,7 +70,7 @@ const Login = (props)=>{
                                 name='password'
                                 onChange={handleChange}
                             />
-                            <span>{serverError}</span>
+                            <span style={{color:'red'}}>{serverError}</span>
                         </div>
                         
                         <button type="submit" class="btn btn-primary">Login</button>

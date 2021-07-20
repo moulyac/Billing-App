@@ -4,10 +4,12 @@ import { amountPerDay, billsPerDay, salesPercentage } from "../../../helperfunct
 const StatsOf5Days = ()=>{
 
     const bills = useSelector((state)=>state.bills)
+    console.log('bills',bills)
 
     const billsperday = billsPerDay(bills)
-    const amountperday = amountPerDay()
-
+    const amountperday = amountPerDay(billsperday)
+    
+console.log(billsperday,amountperday)
     return <div>
         {
             bills.length? 

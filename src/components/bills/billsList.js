@@ -1,4 +1,5 @@
-import React, { useDebugValue, useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useReactToPrint } from 'react-to-print'
 import { useDispatch, useSelector } from 'react-redux'
 import {Link, Route} from 'react-router-dom'
 import { asynBillDelete, asynBillGet } from '../../action/billsAction'
@@ -8,9 +9,11 @@ import Swal from 'sweetalert2'
 import { swal } from '../../selector'
  
  export const BillsList = ()=>{
-    const bills = useSelector((state)=>{
+    const billdata = useSelector((state)=>{
         return state.bills
     })
+
+    const bills = [...billdata].reverse()
 
 
     const customers = useSelector((state)=>{
@@ -47,21 +50,21 @@ import { swal } from '../../selector'
     }
     return <div class='container mt-5'>
         <h2>All Bills - {bills.length} </h2>
-        <div class='container mt-3'>
+        <div class='container mt-3 text-center' style={{overflow:'scroll', height:'350px'}}>
         {
             bills.map((bill)=>{
                 return <div key={bill._id}>
                     <li class="row fs-4">
-                        <div class='col-2'>
+                        <div class='col'>
                             {customername(bill.customer,customers)} 
                         </div>
-                        <div class='col-2'>
+                        <div class='col'>
                             {bill.date.split('T')[0]}  
                         </div>
-                        <div class='col-1'>
+                        <div class='col'>
                             <Link to={`/bill/${bill._id}`}>view</Link>
                         </div>
-                        <div class='col-1'>
+                        <div class='col'>
                             <button class="btn btn-danger btn-sm my-2 mx-3" onClick={ ()=>handleDelete(bill._id)} >Delete</button>
                         </div>
                 </li>
@@ -75,6 +78,7 @@ import { swal } from '../../selector'
 export const ViewBill = (props)=>{
     const dispatch = useDispatch()
     const { id }= props.match.params
+    const componentRef = useRef()
     const bills = useSelector((state)=>{
         return state.bills
     })
@@ -90,13 +94,14 @@ export const ViewBill = (props)=>{
     useEffect(()=>{
         dispatch(asynProductGet())
         dispatch(getCustomers())
+        dispatch(asynBillGet())
     },[])
 
     const billid = bills.find((bill)=>{
         return bill._id == id
     })
 //console.log(billid)
-    const { customer, date, lineItems, total } = billid
+    const { customer, date, lineItems, total } = billid ? billid : ''
 
     const customerd = customers.find((cust)=>{
         //console.log(customer)
@@ -104,18 +109,30 @@ export const ViewBill = (props)=>{
     })
 
 
-    const productd = lineItems.map((item)=>{
+    const productd = lineItems && lineItems.map((item)=>{
         const prodd = products.find((p)=>{
             return p._id == item.product
         })
         return {...prodd,quantity:item.quantity,subTotal:item.subTotal}
     })
 
+    const pageStyle = `
+    @page {
+        margine :  400mm;
+    }`;
+
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+        pageStyle: pageStyle
+      });
      //console.log(productd)
     
         return <div class='container'>
-            <Link to='/bills' style={{fontFamily:'auto'}}>Back to list</Link>
+            {
+                customers.length && products.length && bills.length ?
             <div>
+            <Link to='/bills' style={{fontFamily:'auto'}}>Back to list</Link>
+            <div ref={componentRef} class='p-2'>
                 <div class='row'>
                    <div class='col'>
                         <h1> {user.businessName} </h1>
@@ -123,7 +140,7 @@ export const ViewBill = (props)=>{
                    </div>
 
                     <div class='col'>
-                        <h3>Date : {date.split('T')[0]} </h3>
+                        <h3>Date : { date && date.split('T')[0]} </h3>
                         <h3>Invoice No:  </h3>
                     </div>
                 </div>
@@ -161,5 +178,9 @@ export const ViewBill = (props)=>{
                 </div>
             </div>
         </div>
+        <div>
+            <button onClick={handlePrint}>Print</button>
+        </div>
+        </div>: null}
         </div>
 }

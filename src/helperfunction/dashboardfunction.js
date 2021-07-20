@@ -1,10 +1,8 @@
-const filterByDate = []
-
 export const billsPerDay = (bills)=>{
     const dateadded= []
-
+    const filterByDate = []
     bills.forEach((bill)=>{
-        if(filterByDate.length < 5)
+       // if(filterByDate.length)
             if(!dateadded.includes(bill.date)){
                 dateadded.push(bill.date)
                 const res = bills.filter((b)=>{
@@ -13,31 +11,31 @@ export const billsPerDay = (bills)=>{
                 filterByDate.push(res)
             }
     })
-
+     
     const result = [...filterByDate]
-    return result.reverse()
+    return result.reverse().slice(0,5)
 }
 
- export const amountPerDay = ()=>{
-    const amountperday = filterByDate.map((arr)=>{
+ export const amountPerDay = (data)=>{
+    
+    const amountperday = data.map((arr)=>{
         let totalamt = 0
         arr.forEach((item)=>{
-           item.lineItems.forEach((subt)=>{
+            item.lineItems.forEach((subt)=>{
                 totalamt += subt.subTotal 
-           })
+            })
         })
         return totalamt
     })
-    return amountperday.reverse()
+    return amountperday
 }
+
 
 export const income = (bills)=>{
     let amount = 0
-
     bills.forEach((bill)=>{
         amount += bill.total
     })
-
     return amount
 }
 
@@ -120,12 +118,11 @@ export const top5customers = (bills, customers)=>{
         return (b.length - a.length)
     })
 
-    //console.log('s',sorted)
     const result =[]
     for(let i=0;i<5;i++){
         result.push(sorted[i])
     }
-    //console.log(result)
+
     return result 
 }
 
