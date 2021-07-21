@@ -13,7 +13,7 @@ export const billsPerDay = (bills)=>{
     })
      
     const result = [...filterByDate]
-    return result.reverse().slice(0,5)
+    return result? result.reverse().slice(0,5) : []
 }
 
  export const amountPerDay = (data)=>{
@@ -27,7 +27,7 @@ export const billsPerDay = (bills)=>{
         })
         return totalamt
     })
-    return amountperday
+    return amountperday? amountperday : 0
 }
 
 
@@ -76,7 +76,7 @@ const productfreq = (bills, products)=>{
         return obj
     })
 //console.log(result)
-    return [...result]
+    return result? [...result]:[]
 
 }
 
@@ -113,14 +113,21 @@ export const top5customers = (bills, customers)=>{
         })
         customerfreq.push(freq)
     })
-
-    const sorted = customerfreq.sort ((a,b)=>{
-        return (b.length - a.length)
-    })
-
     const result =[]
-    for(let i=0;i<5;i++){
-        result.push(sorted[i])
+    if(customerfreq.length){
+        const sorted = customerfreq.sort ((a,b)=>{
+            return (b.length - a.length)
+        })
+        if(sorted.length>5){
+            for(let i=0;i<5;i++){
+                result.push(sorted[i])
+            }
+        }
+        else{
+            for(let i=0;i<sorted.length-1;i++){
+                result.push(sorted[i])
+            }
+        }
     }
 
     return result 

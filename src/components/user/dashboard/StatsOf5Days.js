@@ -11,9 +11,6 @@ const StatsOf5Days = ()=>{
     
 console.log(billsperday,amountperday)
     return <div>
-        {
-            bills.length? 
-        
         <div class='border'>
             <h3 class='mb-4' style={{color:'#843CC7'}}> Stats of past 5 days:</h3>
                 {
@@ -29,8 +26,7 @@ console.log(billsperday,amountperday)
                         </div>                                      
                    })
                 }
-        </div>:null
-}
+        </div>
     </div>
 }
 export default StatsOf5Days

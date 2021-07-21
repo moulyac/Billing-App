@@ -13,7 +13,7 @@ const MainPage = ()=>{
 
     return<div>
         {
-            customers.length && bills.length &&  products.length ?
+            customers && bills &&  products ?
         
         <div>
             <div>

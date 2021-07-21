@@ -35,8 +35,8 @@ const Top5Customers = ()=>{
                                 topcustomers.map((t,i)=>{
                                     return <tr>
                                         <td scope="row">{i+1}</td>
-                                        <td>{customerName(t[0].customer,customers).name}</td>
-                                        <td>{t.length}</td>
+                                        <td>{t ?  customerName(t[0].customer,customers).name: ''}</td>
+                                        <td>{t && t.length}</td>
                                         <td><button class='btn btn-light' onClick={()=>{
                                             handlecutomerDetails(t,customerName(t[0].customer,customers)) 
                                             handleShow()
