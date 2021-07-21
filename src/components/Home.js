@@ -60,7 +60,7 @@ const Home = (props)=>{
                 login &&
                 <div>
 
-                    <div class='row align-items-center d-flex justify-content-between px-2' style={{backgroundColor: '#e3f2fd'}}>
+                    <div class='row align-items-center d-flex justify-content-between px-2' style={{backgroundColor: 'rgb(197 203 208)'}}>
                         <div class='col-3'>
                             <h1 style={{fontSize:'4rem'}}><Link to='/dashboard' style={{color:'#ff7600e8', textDecoration:'none'}}>ProcessPro</Link></h1>
                         </div> 
