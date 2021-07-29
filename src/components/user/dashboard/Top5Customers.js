@@ -31,7 +31,7 @@ const Top5Customers = ()=>{
                     </tr>
                 </thead>
                        <tbody>
-                            { topcustomers.length>0 ?
+                            { bills.length && customers.length && topcustomers.length>0 ?
                                 topcustomers.map((t,i)=>{
                                     return <tr>
                                         <td scope="row">{i+1}</td>

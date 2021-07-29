@@ -4,7 +4,7 @@ import { amountPerDay, billsPerDay, salesPercentage } from "../../../helperfunct
 const StatsOf5Days = ()=>{
 
     const bills = useSelector((state)=>state.bills)
-    console.log('bills',bills)
+    //console.log('bills',bills)
 
     const billsperday = billsPerDay(bills)
     const amountperday = amountPerDay(billsperday)
@@ -13,7 +13,7 @@ console.log(billsperday,amountperday)
     return <div>
         <div class='border'>
             <h3 class='mb-4' style={{color:'#843CC7'}}> Stats of past 5 days:</h3>
-                {
+                {bills.length &&
                    billsperday.map((s,i)=>{
                        return <div class='row m-2'>
                            <div class='col-6'>
