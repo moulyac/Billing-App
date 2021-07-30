@@ -1,20 +1,22 @@
 .logregpage{
     width:25rem;
-    margin-top: 5rem;
+    margin-top: 2rem;
     /* margin-left: 30rem; */
 }
 
 body{
-    background-color: #eafbfd;
+    background-color: white;
+    overflow-x: hidden;
 }
-
-
 
 .border{
     padding: 3rem;
     padding-top: 2rem;
+    border-radius: 5px;
     padding-bottom: 0.1rem;
     background-color: rgb(252, 251, 249);
+    box-shadow: 0px 0px 8px #888888;
+
 }
 
 .searchbar{

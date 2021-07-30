@@ -8,7 +8,7 @@ const ProductForm = ({handleaddproduct, editProduct, callbacksetEditproduct, id}
     const [price, setprice] = useState(editProduct? editProduct.price : '')
    
     const dispatch = useDispatch()
-
+console.log(editProduct)
     const handlesubmit = (e)=>{
         e.preventDefault()
         const formDate = {

@@ -11,7 +11,7 @@ const InfoCards = ()=>{
                
                <div class='col-3'>
                    <div class="card text-white bg-success">
-                       <div class="card-header text-center" style={{fontFamily:'initial', fontSize:'x-large'}}>
+                       <div class="card-header text-center" style={{fontSize:'x-large'}}>
                            <strong>CUSTOMERS</strong>
                        </div>
                        <div class="card-body">
@@ -22,7 +22,7 @@ const InfoCards = ()=>{
 
                <div class='col-3'>
                    <div class="card text-white bg-success">
-                       <div class="card-header text-center" style={{fontFamily:'initial', fontSize:'x-large'}}>
+                       <div class="card-header text-center" style={{fontSize:'x-large'}}>
                           <strong>PRODUCTS</strong> 
                        </div>
                        <div class="card-body">
@@ -33,7 +33,7 @@ const InfoCards = ()=>{
 
                <div class='col-3'>
                    <div class="card text-white bg-success">
-                       <div class="card-header text-center" style={{fontFamily:'initial', fontSize:'x-large'}}>
+                       <div class="card-header text-center" style={{fontSize:'x-large'}}>
                           <strong>ORDER</strong> 
                        </div>
                        <div class="card-body">
@@ -44,7 +44,7 @@ const InfoCards = ()=>{
 
                <div class='col-3'>
                    <div class="card text-white bg-success">
-                       <div class="card-header text-center" style={{fontFamily:'initial', fontSize:'x-large'}}>
+                       <div class="card-header text-center" style={{ fontSize:'x-large'}}>
                           <strong>CASH FLOW</strong> 
                        </div>
                        <div class="card-body">

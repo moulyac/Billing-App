@@ -19,7 +19,14 @@ const Home = (props)=>{
         return state.userLogin
     })
     const dispatch = useDispatch()
-   
+    
+    const logoStyle ={
+        fontSize: '30px',
+        padding:'10px',
+        //color:'#ff7600e8',
+        //fontFamily: 'fantasy'
+                    
+    }
 
     const link = {
         textDecoration: 'none',
@@ -34,23 +41,23 @@ const Home = (props)=>{
                     
                     <div class='row'>
                     
-                        <div class='col'>
-                            <Link to='/' class='fs-3 ms-4' style={{TextDecoder:'none'}} >ProcessPro</Link>
+                         <div class='col'>
+                            <h1 class='text-primary' style={logoStyle}>ProcessPro</h1>
                         </div>
-                        <div class='col' >
+                        {/* <div class='col' >
                         
                             <ul  class="nav  justify-content-end" >
                                 
                                 <li class="nav-item"><Link class="nav-link" to='/login'>SignIn</Link></li>
                                 <li class="nav-item"><Link class="nav-link" to='/register'> SignUp</Link></li> 
                             </ul>
-                        </div>
-                
+                        </div> */}
+                 
                     </div> 
                     <div>
  
-                        <Route path='/' component={Homepage} exact={true}/>
-                        <Route path='/login' component={Login} exact={true} />
+                        {/* <Route path='/' component={Homepage} exact={true}/> */}
+                        <Route path='/' component={Login} exact={true} />
                         <Route path='/register' component={Register} exact={true}/>
                        
                     </div>
@@ -61,11 +68,11 @@ const Home = (props)=>{
                 login &&
                 <div>
 
-                    <div class='row align-items-center d-flex justify-content-between px-2' style={{backgroundColor: 'rgb(197 203 208)'}}>
+                    <div class='row align-items-center d-flex justify-content-between px-2' style={{background: 'linear-gradient(to right, #ee9ca7, #ffdde1)'}}>
                         <div class='col-3'>
-                            <h1 style={{fontSize:'4rem'}}><Link to='/dashboard' style={{color:'#ff7600e8', textDecoration:'none'}}>ProcessPro</Link></h1>
+                            <h1 style={{fontSize:'2rem', padding:'2px'}}><Link to='/dashboard' style={{color:'black', textDecoration:'none'}}>ProcessPro</Link></h1>
                         </div> 
-                        <div class='col-5 text-end' style={{fontSize:'1.5rem'}}>
+                        <div class='col-5 text-end' style={{fontSize:'1rem'}}>
 
                             
                             

@@ -3,9 +3,9 @@ const Homepage = ()=>{
     return (
         <div class='row animate__animated animate__slideInRight'>
             <div class='col'>
-            <img src={imgpath} alt='image not found' />
+            <img src={imgpath} style={{height:'90vh'}} alt='image not found' />
             </div>
-            <div class='col text-center'>
+            {/* <div class='col text-center'>
                 <h1 style={{fontSize: '6rem',
                     wordBreak: 'break-all',
                     paddingTop: '140px',
@@ -14,7 +14,7 @@ const Homepage = ()=>{
                     
                 >ProcessPro</h1>
             </div>
-            
+             */}
         </div>
     )
 }

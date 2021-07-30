@@ -6,6 +6,7 @@ import '../style.css'
 import Homepage from '../Homepage'
 
 const Login = (props)=>{
+    const imgpath = 'https://uploads-ssl.webflow.com/5e3ce2ec7f6e53c045fe7cfa/603dd39e1da857523f684124_Frame-21.png'
     const [email, setEmail]= useState('dct17user@gmail.com')
     const [password, setPassword]= useState('dct17user123')
     const [serverError, setserverError] = useState('')
@@ -42,17 +43,18 @@ const Login = (props)=>{
         }
     }
     //console.log(login)
-    return<div class='row '>
+    return(
+    <div class='row'>
         <div class='col'>
-            <Homepage/>
+            <img src={imgpath} style={{height:'80vh', marginLeft:'3rem'}} alt='image not found' />
         </div>
         <div class='col animate__animated animate__zoomIn'>
-    <div  class='logregpage'>
+            <div  class='logregpage'>
             <div class='border'>
-                <h2 style={{ textAlign:'center'}} class='mb-5'>Login Form</h2>
+                <h2 style={{ textAlign:'center'}} class='mb-4 text-primary'>Login</h2>
                     <form onSubmit={handleSubmit} class="Form">
                         <div class="mb-3">
-                            <label for="inputEmail1" class="form-label">Email address</label>
+                            <label for="inputEmail1" class="form-label">Email address<span className="text-danger">*</span></label>
                             <input type="email" class="form-control" id="inputEmail1"
                                 type='email'
                                 placeholder='enter email'
@@ -62,7 +64,7 @@ const Login = (props)=>{
                             />
                         </div>
                         <div class="mb-3">
-                            <label for="inputPassword1" class="form-label">Password</label>
+                            <label for="inputPassword1" class="form-label">Password<span className="text-danger">*</span></label>
                             <input type="password" class="form-control" id="inputPassword1"
                                 type='password'
                                 placeholder='enter password'
@@ -74,13 +76,13 @@ const Login = (props)=>{
                         </div>
                         
                         <button type="submit" class="btn btn-primary">Login</button>
-                        <hr/><p style={{textAlign:'center'}} class='pd-1'>Dont have a account?<Link to='/register'>signUp</Link></p>
+                        <hr/><p style={{textAlign:'center'}} class='pd-1'>Dont have a account?<Link style={{textDecoration:'none'}} to='/register'> Sign up</Link></p>
 
                     </form>
             </div>
         </div>
         </div>
-        </div>
+        </div>)
 }
 
 export default Login

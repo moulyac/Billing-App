@@ -58,11 +58,11 @@ useEffect(()=>{
             <div class='col animate__animated animate__zoomIn'>
             <div class="logregpage">
             <div class="border">
-                <h2 style={{textAlign:'center'}}>Register form</h2>
+                <h2 class='text-primary' style={{textAlign:'center'}}>Register</h2>
                 <form onSubmit={formik.handleSubmit}>
 
-                    <div class='mt-5'>
-                        <label for="username" class="form-label">Username*</label>
+                    <div class='mt-4'>
+                        <label for="username" class="form-label">Username<span className="text-danger">*</span></label>
                         <input type="text" class="form-control" id="username" 
                             placeholder='enter username'
                                     name='username'
@@ -77,7 +77,7 @@ useEffect(()=>{
                     </div>
 
                     <div class='mt-3'>
-                        <label for="validationServer02" class="form-label">Email*</label>
+                        <label for="validationServer02" class="form-label">Email<span className="text-danger">*</span></label>
                         <input type="text" class="form-control" id="validationServer02" 
                             placeholder='enter email'
                             name='email'
@@ -92,7 +92,7 @@ useEffect(()=>{
                     </div>
 
                     <div class='mt-3'>
-                        <label for="password" class="form-label">Password*</label>
+                        <label for="password" class="form-label">Password<span className="text-danger">*</span></label>
                         <input  class="form-control" id="password" 
                                 type='password'
                                 placeholder='enter password'
@@ -108,7 +108,7 @@ useEffect(()=>{
                     </div>
 
                     <div class='mt-3'>
-                        <label for="businessname" class="form-label">Business Name</label>
+                        <label for="businessname" class="form-label">Business Name<span className="text-danger">*</span></label>
                         <input  class="form-control" id="businessname" 
                                 type='text'
                                 placeholder='enter businessName'
@@ -124,7 +124,7 @@ useEffect(()=>{
                     </div>
 
                     <div class='mt-3'>
-                        <label for="address" class="form-label">Address</label>
+                        <label for="address" class="form-label">Address<span className="text-danger">*</span></label>
                         <input  class="form-control" id="address" 
                             type='text'
                             placeholder='enter address'
@@ -140,7 +140,7 @@ useEffect(()=>{
                     </div>
                     
                     <input type='submit' class="btn btn-primary mt-3"/>
-                    <hr/><p style={{textAlign:'center'}}>Have a account?<Link to='/login'>signIn</Link></p>
+                    <hr/><p style={{textAlign:'center'}}>Have a account?<Link to='/'  style={{textDecoration:'none'}}> Sign In</Link></p>
                 </form>
             </div>
             </div>
