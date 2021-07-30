@@ -141,7 +141,7 @@ export const ViewBill = (props)=>{
 
                     <div class='col'>
                         <h3>Date : { date && date.split('T')[0]} </h3>
-                        <h3>Invoice No:  </h3>
+                        <h3>Invoice No: {id} </h3>
                     </div>
                 </div>
 

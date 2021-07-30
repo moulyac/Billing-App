@@ -12,6 +12,7 @@ import Bills from './bills/bills'
 import {ViewBill} from './bills/billsList'
 import { swalAuthAlert } from '../selector'
 import MainPage from './user/dashboard/mainpage'
+import PrivateRoute from '../helpers/PrivateRoute'
 
 const Home = (props)=>{
     const login = useSelector((state)=>{
@@ -118,6 +119,71 @@ const Home = (props)=>{
                 </div>
             }
         </div>
+        // <div>
+        //     {!login && <>
+        //         <div>
+        //             <div class='row'>
+                        
+        //                 <div class='col'>
+        //                     <Link to='/' class='fs-3 ms-4' style={{TextDecoder:'none'}} >ProcessPro</Link>
+        //                 </div>
+        //                 <div class='col' >
+                        
+        //                     <ul  class="nav  justify-content-end" >
+                                
+        //                         <li class="nav-item"><Link class="nav-link" to='/login'>SignIn</Link></li>
+        //                         <li class="nav-item"><Link class="nav-link" to='/register'> SignUp</Link></li> 
+        //                     </ul>
+        //                 </div>
+        //             </div> 
+            
+        //             <div>
+        //                 <Route path='/' component={Homepage} exact={true}/>
+        //                 <Route path='/login' component={Login} exact={true} />
+        //                 <Route path='/register' component={Register} exact={true}/>
+        //             </div>
+        //         </div> 
+        //     </>}
+            
+        //         <div>{login&&
+        //             <div class='row align-items-center d-flex justify-content-between px-2' style={{backgroundColor: 'rgb(197 203 208)'}}>
+        //                 <div class='col-3'>
+        //                     <h1 style={{fontSize:'4rem'}}><Link to='/dashboard' style={{color:'#ff7600e8', textDecoration:'none'}}>ProcessPro</Link></h1>
+        //                 </div> 
+        //                 <div class='col-5 text-end' style={{fontSize:'1.5rem'}}>
+        //                         <Link style={link}  to='/customer'> Customer</Link>
+        //                         <Link style={link} to='/product'> Product</Link>
+        //                         <Link style={link}  to='/bills'> Bills</Link>
+        //                         <Link style={link} to='/account'>Account</Link>
+        //                         <Link style={link}  onClick={()=>{
+        //                                 localStorage.removeItem('token')
+        //                                 dispatch(stateLogin(false))
+        //                                 props.history.push('/')
+        //                                 swalAuthAlert('Successfully logged out')
+        //                                 window.location.reload()
+        //                             }}
+        //                         > Logout</Link>
+        //                 </div>
+                        
+        //             </div> }
+
+        //             <div class='row container m-4'>
+
+        //                 <PrivateRoute path='/dashboard' component={MainPage} />
+
+        //                 <PrivateRoute path='/account' component={Account} />
+        //                 <PrivateRoute path='/customer' component={Customer} />
+        //                 <PrivateRoute path='/product' component={Product} />
+
+        //                 <PrivateRoute path='/bills' component={Bills} />
+
+        //                 <PrivateRoute path={`/bill/:id`} component={ViewBill}/>
+
+        //             </div>            
+                                
+        //         </div>
+            
+        // </div>
 
         
     )

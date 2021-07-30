@@ -6,8 +6,8 @@ import '../style.css'
 import Homepage from '../Homepage'
 
 const Login = (props)=>{
-    const [email, setEmail]= useState('')
-    const [password, setPassword]= useState('')
+    const [email, setEmail]= useState('dct17user@gmail.com')
+    const [password, setPassword]= useState('dct17user123')
     const [serverError, setserverError] = useState('')
 
     const login = useSelector((state)=>{

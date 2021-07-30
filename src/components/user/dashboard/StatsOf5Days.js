@@ -11,7 +11,7 @@ const StatsOf5Days = ()=>{
     
 console.log(billsperday,amountperday)
     return <div>
-        <div class='border'>
+        <div class=''>
             <h3 class='mb-4' style={{color:'#843CC7'}}> Stats of past 5 days:</h3>
                 {bills.length &&
                    billsperday.map((s,i)=>{

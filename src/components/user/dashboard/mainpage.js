@@ -23,7 +23,7 @@ const MainPage = ()=>{
                 <TodayCashFlow/>
             </div>
             <div class='row my-3'>
-                <div class='col-6'>
+                <div class='col-6 border'>
                     <StatsOf5Days/>
                 </div>
                 <div class='col'>
