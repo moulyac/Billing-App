@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+#ProcessPro
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ProcessPro is a website used to make billing much easy and maintain all the products and customers details. And also from the dashbord column keep track of you business.
 
-## Available Scripts
+#packages used
 
-In the project directory, you can run:
+*react
+*redux
+*react-router-dom
+*axios
+*redux-thunk
+*formik
+*yup
+*bootstrap
+*googe-charts
+*sweetalerts
 
-### `npm start`
+#Modules 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Registeration
+2. Login 
+3. Dashboard
+4. Products
+5. Customers
+6. Bills
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#1.Registeration
 
-### `npm test`
+In this module user can get register by provinding the necessary details like, name, email, password, business name, address.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#2. Login
 
-### `npm run build`
+Once a user is register he can login with there email and password.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#3. Dashborard
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+*When the user logins they will be taken to the dashboard page.
+*Here there will details like number of customer, products, bills, and cashflow till that date.
+*There is also a column which shows that days cashflow.
+*Five days of stats is also display with a total bills per day with the total bills till date percentage.
+*The top 5 customers and products details and the products wic are not sold even onec are displayed.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#4. Products
 
-### `npm run eject`
+*In this module there is list of all products with its price.
+*User can add new products also by providing product name and price.
+*User can even update a product and delete them.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#5. Customers
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+*In this module user can add customers by providing there name, email, mobile number.
+*There is a list of all customers in the same page with a delete nd edit options.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#6. Bills
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*User can create a bills here by providing necessary details required in the bill form.
+*By providing customer mobil number, the dtails of the customer is automatical filled.
+*prodct name should be procided and in how much quantity the customer needs. The price and subtotal is showed.
+*Can add as much products needed and even delete them.
+*the grandtotal is shown.
+*after giving submit, when clicked on bill the invoice is shown which can be printed.
